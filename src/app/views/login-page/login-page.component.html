@@ -1,0 +1,98 @@
+<div class="login container">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="signIn(email.value, password.value)"
+    class="form login__form"
+  >
+    <img
+      src="../../../assets/img/ava.jpg"
+      class="form__avatar tui-space_bottom-5"
+      alt="Bhakti avatar"
+    />
+    <h3 class="form__title tui-text_h4 tui-space_bottom-10">
+      Bhakti Vikasa Swami
+    </h3>
+    <tui-input
+      tuiTextfieldExampleText="Enter your email"
+      formControlName="email"
+      tuiTextfieldSize="m"
+      class="form__input tui-space_bottom-4"
+      tuiHintContent="Email"
+      #email
+    >
+      E-mail
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Enter your password"
+      formControlName="password"
+      tuiTextfieldType="password"
+      class="form__input tui-space_bottom-6"
+      tuiTextfieldSize="m"
+      tuiHintContent="Password"
+      #password
+    >
+      Password
+    </tui-input>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="submit"
+      size="m"
+      class="tui-space_bottom-5 form__button"
+      appearance="primary-orange"
+    >
+      Sign In
+    </button>
+    <!-- /.tui-col_12 -->
+    <a routerLink="/restore" class="link form__forgot tui-space_bottom-6"
+      >Forgot your password?</a
+    >
+    <p class="login__text tui-space_bottom-1">
+      Not have an account yet?
+      <a routerLink="/register" class="link tui-space_left-2">Create one</a>
+    </p>
+    <div class="line">
+      <p class="tui-space_bottom-3 line__text tui-text_body-s">or</p>
+    </div>
+
+    <div class="login__buttons-wrapper">
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        (click)="signInWithGoogle()"
+        icon="./../../../assets/img/sprite.svg#google"
+        class="tui-col_8 tui-space_bottom-3"
+        appearance="outline-blue"
+      >
+        Continue with Google
+      </button>
+      <!-- <button
+        tuiIconButton
+        type="button"
+        size="m"
+        (click)="signInWithAnyProvider('facebook')"
+        class="login__icon-button"
+        appearance="outline-blue"
+      >
+        <svg>
+          <use xlink:href="./../../../assets/img/sprite.svg#facebook"></use>
+        </svg>
+      </button> -->
+      <button
+        tuiIconButton
+        type="button"
+        size="m"
+        (click)="signInWithAnyProvider('apple')"
+        class="login__icon-button"
+        appearance="outline-blue"
+      >
+        <svg>
+          <use xlink:href="./../../../assets/img/sprite.svg#apple"></use>
+        </svg>
+      </button>
+    </div>
+  </form>
+  <!-- /.form login__form -->
+</div>
+<!-- /.login -->

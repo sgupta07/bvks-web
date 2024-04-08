@@ -1,0 +1,46 @@
+<form [formGroup]="form" class="playlist-dialog">
+  <img
+    src="../../../../../assets/icons/close.svg"
+    class="close-icon"
+    (click)="closeModal()"
+  />
+  <tui-input
+    formControlName="playlistTitle"
+    tuiTextfieldSize="m"
+    class="playlist-dialog__search tui-space_bottom-4"
+    [(ngModel)]="searchRequest"
+    (ngModelChange)="searchPlaylists()"
+  >
+    Search {{ searchRequest }}
+  </tui-input>
+  <tui-scrollbar class="playlist-dialog__scroll">
+    <app-playlist-checkbox
+      *ngFor="let playlist of playlists"
+      [playlist]="playlist"
+    ></app-playlist-checkbox>
+  </tui-scrollbar>
+  <div class="playlist-dialog__create-playlist">
+    <button
+      tuiButton
+      icon="../../../../../assets/img/sprite.svg#plus"
+      appearance="flat"
+      type="button"
+      size="s"
+      (click)="showCreateDialog()"
+    >
+      Create new playlist
+    </button>
+  </div>
+  <div class="playlist-dialog-btn tui-space_right-6">
+    <button
+      [disabled]="playlistsToAdd.length === 0"
+      tuiButton
+      appearance="primary-yellow"
+      type="button"
+      size="s"
+      (click)="addToPlaylist()"
+    >
+      Add
+    </button>
+  </div>
+</form>

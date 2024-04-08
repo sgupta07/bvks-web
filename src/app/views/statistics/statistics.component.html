@@ -1,0 +1,56 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Statistics</h2>
+  <button
+    (click)="shareResults()"
+    tuiButton
+    appearance="outline"
+    type="button"
+    size="s"
+  >
+    Share results
+  </button>
+</div>
+<div
+  class="dashboard__wrapper statistics"
+  *ngIf="isLecturesInfoLoaded; loader"
+  id="stats"
+>
+  <div class="statistics-total">
+    <div class="statistics-total__item">
+      <span>Total audio files</span>
+      <span>{{ totalAudio }}</span>
+    </div>
+    <div class="statistics-total__item">
+      <span>Total listened</span>
+      <span>{{ totalListened }}</span>
+    </div>
+  </div>
+  <div class="statistics-periods">
+    <app-statistics-period
+      title="This week"
+      [InfoListened]="thisWeek"
+    ></app-statistics-period>
+    <app-statistics-period
+      title="Last week"
+      [InfoListened]="lastWeek"
+    ></app-statistics-period>
+    <app-statistics-period
+      title="Last month"
+      [InfoListened]="lastWeek"
+    ></app-statistics-period>
+    <app-custom-statistics-period
+      [InfoListened]="allTime"
+      [listenInfo]="listenInfo"
+    ></app-custom-statistics-period>
+  </div>
+</div>
+<ng-template #loader>
+  <tui-loader
+    [showLoader]="contentLoader"
+    [overlay]="true"
+    size="xxl"
+    [inheritColor]="true"
+    class="content-loader"
+  >
+  </tui-loader>
+</ng-template>

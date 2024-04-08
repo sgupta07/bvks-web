@@ -1,0 +1,448 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Media library</h2>
+  <!-- TODO "сделать отдельный компонент для этих кнопок" -->
+  <form [formGroup]="form" class="dashboard-head__filters-wrapper">
+    <div class="select-mode-wrapper" *ngIf="isSelectMode; else filters">
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#addPlaylist"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="addSelectedToPlaylist()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Add to Playlist
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../../assets/img/sprite.svg#heart"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="addSelectedToFavorites()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Add to Favorites
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#download"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="downloadLectures()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Download
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#checkbox"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="markSelectedAsCompleted()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Mark as Complete
+        </button>
+      </div>
+
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          (click)="selectAll()"
+          tuiButton
+          appearance="outline"
+          type="button"
+          size="s"
+        >
+          Select All
+        </button>
+      </div>
+    </div>
+    <ng-template #filters>
+      <div class="select-wrapper tui-space_right-6">
+        <h5 class="select-wrapper__text">Playback Mode</h5>
+        <tui-select
+          class="select-wrapper__select"
+          tuiTextfieldSize="s"
+          [(ngModel)]="showRequest"
+          formControlName="show"
+        >
+          Audio only (all lectures)
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="['Audio only (all lectures)', 'Only lectures with video']"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <!-- /.select-wrapper -->
+      <div class="select-wrapper tui-space_right-6">
+        <h5 class="select-wrapper__text">Sort by</h5>
+        <tui-select
+          class="select-wrapper__select"
+          tuiTextfieldSize="s"
+          [(ngModel)]="sortRequest"
+          formControlName="sort"
+        >
+          Default View
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="[
+              'Default View',
+              'Duration (low to high)',
+              'Duration (high to low)',
+              'Rec date (oldest first)',
+              'Rec date (latest first)',
+              'Alphabetically (A-Z)',
+              'Alphabetically (Z-A)'
+            ]"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <!-- /.select-wrapper -->
+      <div class="select-wrapper tui-space_right-6">
+        <div class="filter-badge" *ngIf="activeFiltersCount">
+          {{ activeFiltersCount }}
+        </div>
+        <button
+          (click)="showDialog()"
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#filter"
+          appearance="outline"
+          type="button"
+          size="s"
+        >
+          Filters
+        </button>
+      </div>
+    </ng-template>
+    <div class="select-wrapper select-mode-btn">
+      <h5
+        class="select-wrapper__text lectures-length"
+        *ngIf="selectedLecturesLength > 0"
+      >
+        Selected: {{ selectedLecturesLength }}
+      </h5>
+      <button
+        (click)="toggleSelectMode()"
+        tuiButton
+        [appearance]="isSelectMode ? 'secondary' : 'outline'"
+        type="button"
+        size="s"
+      >
+        {{ isSelectMode ? "Cancel" : "Select Multiple Files" }}
+      </button>
+    </div>
+    <!-- /.select-wrapper -->
+  </form>
+  <!-- /.dashboard-head__filters-wrapper -->
+  <ng-template #filters>
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Playback Mode</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="showRequest"
+        formControlName="show"
+      >
+        Audio only (all lectures)
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="['Audio only (all lectures)', 'Only lectures with video']"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <!-- /.select-wrapper -->
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Sort by</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="sortRequest"
+        (ngModelChange)="onSortChange()"
+        formControlName="sort"
+      >
+        Default View
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="[
+            'Default View',
+            'Duration (low to high)',
+            'Duration (high to low)',
+            'Rec date (oldest)',
+            'Rec date (latest)',
+            'Alphabetically (A-Z)',
+            'Alphabetically (Z-A)'
+          ]"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <!-- /.select-wrapper -->
+    <div class="select-wrapper tui-space_right-6">
+      <div class="filter-badge" *ngIf="activeFiltersCount">
+        {{ activeFiltersCount }}
+      </div>
+      <button
+        (click)="showDialog()"
+        tuiButton
+        icon="./../../../assets/img/sprite.svg#filter"
+        appearance="outline"
+        type="button"
+        size="s"
+      >
+        Filters
+      </button>
+    </div>
+  </ng-template>
+</div>
+<!-- /.dashboard-head -->
+<div class="temp-popup" *ngIf="isFilterVisible">
+  <app-filter
+    (onClose)="toggleFilter()"
+    [isVisible]="isFilterVisible"
+  ></app-filter>
+</div>
+<!-- /.temp-popup -->
+<tui-scrollbar class="dashboard__wrapper categories" appPagination>
+  <div *ngIf="lecturesByCatIsReady; else contentLoader">
+    <div *ngIf="isSortRequests()">
+      <h3 class="dashboard__title tui-text_h5">Latest uploads</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.latestUploads,
+              i,
+              'latestUploads'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.latestUploads
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <h3 class="dashboard__title tui-text_h5">Popular</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories.popular,
+              i,
+              'topLectures'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories.popular
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Latest in English</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories.latestInEnglish,
+              i,
+              'latestInEnglish'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories.latestInEnglish
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">हिन्दी</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories.englishInHindi,
+              i,
+              'englishInHindi'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories.englishInHindi
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">বাংলা</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories.bengalian,
+              i,
+              'bengalian'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories.bengalian
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Bhagavad-gita</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.bhagavad,
+              i,
+              'bhagavad'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.bhagavad
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Srimad Bhagavatam</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.srimadBhagavatam,
+              i,
+              'srimadBhagavatam'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.srimadBhagavatam
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Caitanya-caritamrta</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.caritamrta,
+              i,
+              'caritamrta'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.caritamrta
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Bhajans</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.bhajans,
+              i,
+              'bhajans'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.bhajans
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <!-- /.lectures-wrapper -->
+      <h3 class="dashboard__title tui-text_h5">Visnu-sahasranama</h3>
+      <div class="lectures-wrapper">
+        <app-lecture-post
+          [lectureData]="lecture"
+          (onLectureClick)="
+            interractWithLecture(
+              lecture,
+              lecturesByCategories?.visnu,
+              i,
+              'visnu'
+            )
+          "
+          *ngFor="
+            let lecture of lecturesByCategories?.visnu
+              | filterByResources: showRequest
+              | slice: 0:5;
+            index as i
+          "
+        ></app-lecture-post>
+      </div>
+      <h3 class="dashboard__title tui-text_h5">Recommended Playlists</h3>
+      <div class="lectures-wrapper">
+        <app-playlist-post
+          *ngFor="let playlist of recommendedPlaylists | slice: 0:5; index as i"
+          [playlistData]="playlist"
+        ></app-playlist-post>
+      </div>
+    </div>
+  </div>
+  <!-- /.lectures-wrapper -->
+  <ng-template #contentLoader>
+    <tui-loader
+      [showLoader]="contentLoader"
+      [overlay]="true"
+      size="xxl"
+      [inheritColor]="true"
+      class="content-loader"
+    >
+    </tui-loader>
+  </ng-template>
+
+  <app-lectures *ngIf="!isSortRequests()"></app-lectures>
+</tui-scrollbar>

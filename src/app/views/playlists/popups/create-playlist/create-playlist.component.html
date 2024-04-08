@@ -1,0 +1,51 @@
+<form [formGroup]="form" class="playlist-dialog">
+  <img
+    src="../../../../../assets/icons/close.svg"
+    class="close-icon"
+    (click)="closeModal()"
+  />
+  <tui-input
+    formControlName="title"
+    tuiTextfieldSize="m"
+    class="tui-space_bottom-4"
+  >
+    Playlist name
+  </tui-input>
+  <div class="playlist-dialog__select">
+    <tui-input
+      formControlName="lecturesCategory"
+      tuiTextfieldSize="m"
+      class="tui-space_bottom-4"
+      class="select-wrapper__select"
+    >
+      Category
+    </tui-input>
+    <tui-select
+      class="select-wrapper__select"
+      tuiTextfieldSize="m"
+      formControlName="listType"
+    >
+      {{ form.value.listType }}
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="['Private', 'Public']"
+      ></tui-data-list-wrapper>
+    </tui-select>
+  </div>
+
+  <tui-text-area class="tui-space_bottom-4" formControlName="discription"
+    >Description</tui-text-area
+  >
+  <div class="playlist-dialog-btn tui-space_right-6">
+    <button
+      [disabled]="form.invalid"
+      tuiButton
+      appearance="primary-yellow"
+      type="button"
+      size="s"
+      (click)="createPlaylist()"
+    >
+      Create
+    </button>
+  </div>
+</form>

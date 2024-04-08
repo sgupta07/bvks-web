@@ -1,0 +1,40 @@
+<div class="restore container">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="sendEmailToRestorePassword(email.value)"
+    class="form login__form tui-col_4"
+  >
+    <img
+      src="../../../assets/img/ava.jpg"
+      class="form__avatar tui-space_bottom-5"
+      alt="Bhakti avatar"
+    />
+    <h3 class="form__title tui-text_h4 tui-space_bottom-6">
+      Bhakti Vikasa Swami
+    </h3>
+    <div class="tui-space_bottom-2 tui-col_12">
+      <tui-input
+        tuiTextfieldExampleText="Field placeholder"
+        formControlName="email"
+        tuiHintContent="email"
+        #email
+      >
+        Email<span class="tui-required"></span>
+      </tui-input>
+    </div>
+    <div class="tui-col_12">
+      <button
+        tuiButton
+        [disabled]="form.invalid"
+        type="submit"
+        class="tui-col_12 tui-space_bottom-3 tui-space_top-3 form__button"
+        appearance="primary-orange"
+      >
+        Reset Password
+      </button>
+    </div>
+    <!-- /.tui-col_12 -->
+  </form>
+  <!-- /.form login__form -->
+</div>
+<!-- /.restore -->

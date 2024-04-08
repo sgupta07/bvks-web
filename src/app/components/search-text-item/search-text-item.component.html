@@ -1,0 +1,16 @@
+<div class="text-item">
+  <h2
+    class="text-item__title"
+    [routerLink]="['/lecture', data.id, 'transcription']"
+    [queryParams]="{ search: search }"
+  >
+    {{ title || data.id }}
+  </h2>
+  <div
+    class="text-item__desc"
+    appHighlight
+    [search]="search"
+    [text]="data.transcription[0]"
+    [isScrollTo]="false"
+  ></div>
+</div>

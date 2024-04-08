@@ -1,0 +1,50 @@
+<div class="filter">
+  <button class="filter__close-btn">
+    <tui-svg
+      (click)="closeModal()"
+      class="filter__close-btn-icon"
+      src="tuiIconCloseLarge"
+    ></tui-svg>
+  </button>
+  <!-- /.filter__close-btn -->
+  <div class="filter__content">
+    <ul class="filter__tabs">
+      <li
+        *ngFor="let tab of tabs"
+        (click)="selectTab(tab)"
+        class="filter-tab filter__tab"
+        [class.filter-tab--active]="tab === activeTab"
+      >
+        <legend class="tui-text_body-s">
+          {{ tab }}
+          <span *ngIf="getActiveFiltersCount(tab)"
+            >({{ getActiveFiltersCount(tab) }})</span
+          >
+        </legend>
+      </li>
+      <!-- /.filter-tab filter__tab -->
+    </ul>
+    <!-- /.filter__tabs -->
+    <tui-scrollbar class="filter__scroll">
+      <app-filter-variant
+        *ngFor="let variant of activeVariants"
+        [activeTab]="activeTab"
+        [variant]="variant"
+      ></app-filter-variant>
+    </tui-scrollbar>
+  </div>
+  <!-- /.filter__content -->
+  <div class="filter__buttons-wrapper">
+    <button class="filter__button" (click)="clearActiveFilters()">
+      Clear all
+    </button>
+    <button
+      class="filter__button filter__button--apply"
+      (click)="transferLocalFiltersToGlobal(); closeModal()"
+    >
+      Apply
+    </button>
+  </div>
+  <!-- /.filter__buttons-wrapper -->
+</div>
+<!-- /.filter -->

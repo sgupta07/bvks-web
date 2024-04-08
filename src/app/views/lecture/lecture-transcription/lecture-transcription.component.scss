@@ -1,0 +1,204 @@
+.option-buttons {
+  display: flex;
+  justify-content: start;
+  width: 70%;
+  margin-top: 0.5rem;
+  margin-left: -0.8rem;
+}
+
+.transcription-wrapper {
+  position: relative;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+}
+
+.transcription {
+  height: 29rem;
+  overflow-y: auto;
+
+  color: #000;
+  font-weight: 500;
+  font-size: 0.8125rem;
+
+  font-style: normal;
+  line-height: 2rem; /* 246.154% */
+  white-space: pre-wrap;
+}
+
+/* Style for the modal */
+.selection-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 20rem;
+  height: 10rem;
+  padding: 0.4rem;
+  padding: 0.75rem 1rem 1rem 1rem;
+  background-color: white;
+  border: 1.5px solid #fd7e14;
+  border-radius: 0.5rem;
+  transform: translate(-50%, -50%);
+  &__close {
+    position: absolute;
+    top: 10;
+    right: 10;
+    width: 1rem;
+    height: 1rem;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: auto;
+  }
+  &__input {
+    width: 100%;
+  }
+  &__button {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8125rem;
+    font-style: normal;
+    line-height: 1.25rem; /* 153.846% */
+    text-align: center;
+  }
+  &__title {
+    align-self: flex-start;
+    font-weight: 600;
+    font-style: normal;
+  }
+}
+
+/* Style to dim the background when the modal is open */
+.modal-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.lecture {
+  display: flex;
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-size: 13px;
+    line-height: 20px;
+    list-style: none;
+  }
+  &__info {
+    margin-top: 1rem;
+  }
+
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background: rgba(211, 211, 211, 0.062);
+    border: 1px solid var(--tui-support-08);
+    border-radius: 12px;
+
+    span {
+      &:first-of-type {
+        color: #343a40;
+      }
+    }
+  }
+  &__data-placeholder {
+    width: 300px;
+    height: 150px;
+  }
+}
+
+.dashboard__wrapper {
+  height: calc(100vh - 7.7vh);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.reset-search-btn {
+  &__wrapper {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    max-width: 10rem;
+  }
+  &__search-string {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+.search-menu {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  &__input {
+    width: 25rem;
+    margin-bottom: 1rem;
+  }
+  &__button {
+    width: fit-content;
+  }
+}
+
+.title-placeholder {
+  width: 20rem;
+  height: 1.7rem;
+}
+
+.info-popup {
+  position: relative;
+  margin-left: 0.5rem;
+  &__info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: bisque;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__popup {
+    position: absolute;
+    top: 2.5rem;
+    left: -9.5rem;
+    z-index: 10;
+    width: 23rem;
+    padding: 0.5rem 1rem;
+    background-color: beige;
+    border-radius: 25px;
+    &__examples {
+      font-style: italic;
+    }
+  }
+}

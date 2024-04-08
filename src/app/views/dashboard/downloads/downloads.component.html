@@ -1,0 +1,60 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Downloads</h2>
+  <!-- /.dashboard-head__filters-wrapper -->
+</div>
+<!-- /.dashboard-head -->
+<tui-scrollbar class="dashboard__wrapper downloads" appPagination>
+  <table *ngIf="data" class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date added</th>
+        <th>Date of expiry</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data; index as i">
+        <td tuiHintDirection="top" tuiHintMode="onDark" [tuiHint]="nameTooltip">
+          {{ item.lectureName }}
+        </td>
+        <ng-template #nameTooltip>
+          {{ item.lectureName }}
+        </ng-template>
+        <td>
+          {{ item.createdDate.seconds * 1000 | date: "MM.dd.yyyy  HH:mm" }}
+        </td>
+        <td>
+          {{
+            (item.createdDate.seconds + 86400 * 2) * 1000
+              | date: "MM.dd.yyyy  HH:mm"
+          }}
+        </td>
+        <td class="td">
+          <tui-loader
+            class="inline-flex"
+            *ngIf="downloadsStatuses?.length ? !downloadsStatuses[i] : true"
+            [showLoader]="true"
+            [inheritColor]="true"
+          >
+          </tui-loader>
+          <a
+            *ngIf="downloadsStatuses?.length ? downloadsStatuses[i] : false"
+            [href]="item.url ? item.url : ''"
+            target="blank"
+          >
+            <img src="../../../../assets/img/download.svg" alt="" />
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <tui-loader
+    [showLoader]="!data"
+    [overlay]="true"
+    size="xxl"
+    [inheritColor]="true"
+    class="content-loader"
+  >
+  </tui-loader>
+</tui-scrollbar>

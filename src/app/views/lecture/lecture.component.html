@@ -1,0 +1,118 @@
+<app-header></app-header>
+<div class="lecture">
+  <app-sidebar></app-sidebar>
+  <div class="container">
+    <div>
+      <div class="lecture__player">
+        <app-vjs-player
+          *ngIf="source; else playerPlaceholder"
+          [options]="playerOptions"
+          [sources]="source"
+          (onCurrentPlaylistItemChange)="setLectureData($event)"
+          [startPosition]="startPosition"
+          [startTime]="startTime"
+        ></app-vjs-player>
+        <ng-template #playerPlaceholder>
+          <div class="lecture__player-placeholder"></div>
+        </ng-template>
+      </div>
+      <div>
+        <div class="lecture__title__wrapper">
+          <h1
+            class="lecture__title"
+            [class]="{
+              'tui-skeleton': !lectureData,
+              'tui-skeleton_text': !lectureData
+            }"
+          >
+            {{ lectureData?.title ? lectureData.title.join(" ") : "" }}
+          </h1>
+          <button
+            *ngIf="lectureData"
+            tuiButton
+            appearance="primary-orange"
+            size="s"
+            routerLink="transcription"
+          >
+            Transcription
+          </button>
+        </div>
+
+        <div *ngIf="lectureData; else dataPlaceholder">
+          <h2 class="lecture__subtitle">{{ place }}</h2>
+          <ul class="lecture__train train">
+            <li class="train__wagon">
+              {{ lectureData.dateOfRecording | lectureDate }}
+            </li>
+            <li class="train__wagon">
+              {{ contentType }}
+            </li>
+          </ul>
+          <ul class="lecture__list">
+            <li class="lecture__list-item" *ngIf="lectureData.category">
+              <strong>Category </strong>{{ lectureData.category }}
+            </li>
+            <li class="lecture__list-item" *ngIf="lectureData.language.main">
+              <strong>Language </strong>{{ lectureData.language.main }}
+            </li>
+            <li
+              class="tui-space_top-2 lecture__list-item"
+              *ngIf="lectureData.category?.length"
+            >
+              <strong>Category</strong>
+              {{ lectureData.category[0] }}
+            </li>
+            <li class="lecture__list-item" *ngIf="lectureData.description[0]">
+              <strong>Description</strong>
+              {{ lectureData.description.join(", ") }}
+            </li>
+            <li class="lecture__list-item" *ngIf="lectureData.language.main">
+              <strong>Main language</strong> {{ lectureData.language?.main }}
+            </li>
+            <li
+              class="lecture__list-item"
+              *ngIf="lectureData.language?.translations?.length"
+            >
+              <strong>Translations</strong>
+              {{ lectureData.language?.translations?.join(", ") }}
+            </li>
+            <li
+              class="lecture__list-item"
+              *ngIf="lectureData.legacyData?.lectureCode"
+            >
+              <strong>Lecture code</strong>
+              {{ lectureData.legacyData?.lectureCode }}
+            </li>
+            <li
+              class="lecture__list-item"
+              *ngIf="lectureData.location?.country"
+            >
+              <strong>Country</strong> {{ lectureData.location?.country }}
+            </li>
+            <li class="lecture__list-item" *ngIf="lectureData.place.length">
+              <strong>Place</strong>
+              {{ lectureData.place[0] }}
+            </li>
+            <li
+              class="lecture__list-item"
+              *ngIf="lectureData.legacyData?.verse"
+            >
+              <strong>Verse</strong> {{ lectureData.legacyData?.verse }}
+            </li>
+            <li class="lecture__list-item" *ngIf="lectureData.tags.length">
+              <strong>Tags</strong> {{ lectureData.tags?.join(", ") }}
+            </li>
+          </ul>
+        </div>
+        <ng-template #dataPlaceholder>
+          <div class="lecture__data-placeholder tui-skeleton"></div
+        ></ng-template>
+      </div>
+    </div>
+    <div class="lecture__next-videos" [class]="{ 'tui-skeleton': !source }">
+      <div class="vjs-playlist-wrap">
+        <div class="vjs-playlist"></div>
+      </div>
+    </div>
+  </div>
+</div>

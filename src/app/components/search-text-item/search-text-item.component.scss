@@ -1,0 +1,14 @@
+.text-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__title {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  &__desc {
+    font-size: 0.9rem;
+  }
+}

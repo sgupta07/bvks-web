@@ -1,0 +1,83 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Playlists</h2>
+
+  <!-- TODO "сделать отдельный компонент для этих кнопок" -->
+  <form [formGroup]="form" class="dashboard-head__filters-wrapper">
+    <!-- <div class="select-mode-wrapper" *ngIf="isSelectMode; else filters">
+       
+      </div> -->
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Show</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="showRequest"
+        formControlName="show"
+      >
+        All lectures
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="[
+            'All',
+            'Private',
+            'My Public',
+            'All Public',
+            'Recommended',
+            'Favorites'
+          ]"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Sort by</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="sortRequest"
+        formControlName="sort"
+      >
+        Default View
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="[
+            'Default View',
+            'Alphabetically (A-Z)',
+            'Alphabetically (Z-A)'
+          ]"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <!-- /.select-wrapper -->
+    <div class="select-wrapper select-mode-btn">
+      <button
+        tuiButton
+        appearance="outline"
+        size="s"
+        class="action-btn"
+        (click)="showCreateDialog()"
+      >
+        <svg class="action-btn__icon">
+          <use
+            xlink:href="../../../assets/img/icons/playlists-page.svg#addPlaylist"
+          ></use>
+        </svg>
+        New playlist
+      </button>
+    </div>
+    <!-- /.select-wrapper -->
+  </form>
+  <!-- /.dashboard-head__filters-wrapper -->
+</div>
+<tui-scrollbar class="dashboard__wrapper categories" appPagination>
+  <div class="playlists-wrapper" *ngIf="isSortRequests()">
+    <app-playlist-post
+      *ngFor="let playlist of playlists"
+      [playlistData]="playlist"
+    ></app-playlist-post>
+  </div>
+  <app-search-playlists
+    *ngIf="!isSortRequests()"
+    [allPlaylists]="searchPlaylists"
+  >
+  </app-search-playlists>
+</tui-scrollbar>

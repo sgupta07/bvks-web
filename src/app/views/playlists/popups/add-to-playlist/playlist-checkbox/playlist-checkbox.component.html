@@ -1,0 +1,17 @@
+<label class="playlist-variant filter__variant">
+  <tui-checkbox
+    [(ngModel)]="checkBoxValue"
+    (click)="onCheckboxChange()"
+    appearance="primary-orange"
+    class="playlist-variant__checkbox"
+    size="l"
+    checked="false"
+  >
+  </tui-checkbox>
+  <legend class="playlist-variant__text tui-text_body-s">
+    <img class="playlist-type" [src]="checkPlayListTypeImage()" alt="" />
+    <span>
+      {{ playlist.title }}
+    </span>
+  </legend>
+</label>

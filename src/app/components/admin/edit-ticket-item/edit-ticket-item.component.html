@@ -1,0 +1,27 @@
+<article
+  class="ticket"
+  [ngClass]="ticket.status === EditStatusEnum.created ? 'ticket_link' : ''"
+  (click)="openTranscription()"
+>
+  <div class="ticket__row">
+    <h4>{{ title ?? "..." }}</h4>
+    <div class="ticket__withIconBlock">
+      <img
+        *ngIf="ticket.status !== EditStatusEnum.created"
+        [src]="
+          ticket.status === EditStatusEnum.approved
+            ? '../../../../assets/icons/check.svg'
+            : '../../../../assets/icons/cross.svg'
+        "
+        alt="status"
+      />
+      <span class="ticket__info">Ticket {{ ticket.id }}</span>
+    </div>
+  </div>
+  <div class="ticket__row">
+    <p class="ticket__text">{{ ticket.oldText }} - {{ ticket.newText }}</p>
+    <span class="ticket__info">
+      Created: {{ ticket.createdAt | date: "MM.dd.yyyy" }}
+    </span>
+  </div>
+</article>

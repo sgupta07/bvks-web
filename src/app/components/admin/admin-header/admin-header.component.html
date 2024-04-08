@@ -1,0 +1,30 @@
+<header class="container adminHeader">
+  <button class="adminHeader__menuBtn">
+    <tui-svg src="tuiIconMenuLarge"></tui-svg>
+  </button>
+  <div class="adminHeader__user">
+    <img src="../../../../assets/img/ava.jpg" alt="adminAvatar" />
+    <span>Admin</span>
+    <div class="admin-links">
+      <div [routerLink]="['edits']" routerLinkActive="admin-links--active">
+        Suggested edits
+      </div>
+      <div
+        [routerLink]="['transcription']"
+        routerLinkActive="admin-links--active"
+      >
+      Transcripts
+      </div>
+    </div>
+  </div>
+  <button
+    tuiButton
+    type="button"
+    size="s"
+    (click)="logout()"
+    class="tui-col_8 tui-space_bottom-3 logout-btn"
+    appearance="outline-blue"
+  >
+    Log out
+  </button>
+</header>

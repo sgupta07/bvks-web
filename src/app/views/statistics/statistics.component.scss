@@ -1,0 +1,28 @@
+.statistics {
+  &-total {
+    display: flex;
+    flex-direction: column;
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 150px;
+      & span {
+        &:first-child {
+          margin-right: 25px;
+          color: var(--gray-dark);
+          font-size: 11px;
+        }
+        &:last-child {
+          color: black;
+          font-weight: 500;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  &-periods {
+    display: flex;
+    margin-top: 31px;
+  }
+}

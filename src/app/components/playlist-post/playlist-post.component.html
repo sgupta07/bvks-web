@@ -1,0 +1,111 @@
+<article class="playlist">
+  <div
+    class="playlist__img-wrapper"
+    [class]="{ 'tui-skeleton': showSkeleton }"
+    [routerLink]="['/dashboard/playlists', playlistData?.listID]"
+  >
+    <div class="playlist__favorite-btn" *ngIf="isPlaylistInFavorites()">
+      <tui-svg
+        class="icon"
+        src="./../../../assets/img/sprite.svg#heart-filled"
+      ></tui-svg>
+    </div>
+    <img
+      class="playlist__img"
+      [src]="thumbnail"
+      alt=""
+      (load)="hideSkeleton()"
+    />
+    <legend
+      class="playlist__content"
+      *ngIf="
+        this.playlistData.lectureIds && this.playlistData.lectureIds.length > 0;
+        else nolectures
+      "
+    >
+      {{ playlistData.lectureIds?.length }}
+      {{ playlistData.lectureIds?.length > 1 ? "lectures" : "lecture" }}
+    </legend>
+    <ng-template #nolectures>
+      <legend class="playlist__content">No lectures</legend>
+    </ng-template>
+  </div>
+  <!-- /.lecture__img-wrapper -->
+  <div class="playlist__text-wrapper">
+    <button
+      #button
+      [tuiDropdownContent]="otherDropdown"
+      [tuiDropdown]="isDropdownActive"
+      class="playlist__other"
+      [class.playlist__other_active]="isDropdownActive"
+      (click)="toggleDropdown()"
+    >
+      <tui-svg
+        class="playlist__other-icon"
+        src="tuiIconMoreVertLarge"
+      ></tui-svg>
+    </button>
+    <ng-template #otherDropdown>
+      <ul class="dropdown">
+        <li class="dropdown__item tui-text_body-m" (click)="toggleFavorites()">
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconHeartLarge"
+          ></tui-svg>
+          {{
+            isPlaylistInFavorites()
+              ? "Remove from Favorites"
+              : "Add to Favorites"
+          }}
+        </li>
+        <li class="dropdown__item tui-text_body-m" (click)="downloadPlaylist()">
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconDownloadLarge"
+          ></tui-svg>
+          Download
+        </li>
+        <li
+          class="dropdown__item tui-text_body-m"
+          *ngIf="isMyPlaylist"
+          (click)="removePlaylist()"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconTrashLarge"
+          ></tui-svg>
+          Delete playlist
+        </li>
+      </ul>
+    </ng-template>
+    <h3
+      class="playlist__title"
+      [class]="{
+        'tui-skeleton': showSkeleton,
+        'tui-skeleton_text': showSkeleton
+      }"
+    >
+      <img
+        class="playlist__title-type"
+        [src]="checkPlayListTypeImage()"
+        alt=""
+      />
+      <span class="playlist__title-text">
+        {{ playlistData.title }}
+      </span>
+    </h3>
+    <p class="playlist__author">
+      <span> by {{ playlistData.authorEmail }} </span>
+    </p>
+    <span
+      [class]="{
+        'tui-skeleton': showSkeleton,
+        'tui-skeleton_text': showSkeleton,
+        'tui-skeleton_short': showSkeleton
+      }"
+      >{{ playlistData.creationTime | date: "dd/MM/YYYY" }} ·
+      {{ playlistData.lecturesCategory }}</span
+    >
+  </div>
+  <!-- /.lecture__img-wrapper -->
+</article>

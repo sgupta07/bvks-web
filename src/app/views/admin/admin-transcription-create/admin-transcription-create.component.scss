@@ -1,0 +1,106 @@
+:host {
+  display: block;
+}
+
+.adminEdits {
+  height: 100%;
+  margin-top: 16px;
+  padding-right: 112px;
+  padding-left: 112px;
+
+  &__head {
+    margin-bottom: 1rem;
+  }
+
+  &__ticketTabs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-rows: auto;
+    margin-top: 16px;
+    row-gap: 16px;
+  }
+}
+
+.search {
+  &__wrapper {
+    display: flex;
+    gap: 0.1rem;
+  }
+  &__input {
+    width: 15rem;
+  }
+}
+
+.search-error {
+  color: red;
+}
+
+.transcription-wrapper {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.transcription {
+  width: 100%;
+  height: 29rem;
+  overflow-y: auto;
+
+  color: #000;
+  font-weight: 500;
+  font-size: 0.8125rem;
+
+  font-style: normal;
+  line-height: 2rem; /* 246.154% */
+
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.transcription-options {
+  display: flex;
+  justify-content: end;
+  margin-top: 0.5rem;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2;
+  width: 20rem;
+  max-height: 20rem;
+  padding: 1rem;
+  overflow-y: scroll;
+  background-color: #fff;
+  border: slategray 1px solid;
+  border-radius: 20px;
+}
+
+.search-dropdown-lecture {
+  padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: slategray;
+  }
+}
+
+.search-content {
+  position: relative;
+}
+
+.title {
+  margin-bottom: 1rem;
+}

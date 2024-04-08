@@ -1,0 +1,179 @@
+<div class="audioplayer" [class.active]="isPlayerEnabled">
+  <button class="audioplayer__close" (click)="closePlayer()">
+    <img src="../../../assets/img/icons/close.svg" alt="" />
+  </button>
+  <div class="audioplayer__wrap">
+    <div class="audioplayer__main-info" *ngIf="lectureData">
+      <img class="audioplayer__poster" [src]="thumbnail" alt="" />
+      <h2
+        tuiHintDirection="top"
+        tuiHintMode="onDark"
+        [tuiHint]="fullTitleTooltip"
+        class="audioplayer__title"
+      >
+        {{ lectureData.title.join(" ") }}
+      </h2>
+      <ng-template #fullTitleTooltip>
+        {{ lectureData.title.join(" ") }}
+      </ng-template>
+      <p
+        tuiHintDirection="top"
+        tuiHintMode="onDark"
+        [tuiHint]="categoryTooltip"
+        class="audioplayer__category"
+        *ngIf="lectureData.category"
+      >
+        {{ lectureData.category[0] }}
+      </p>
+      <ng-template #categoryTooltip>
+        {{ lectureData.category[0] }}
+      </ng-template>
+    </div>
+    <div class="audioplayer__playlist-btns">
+      <button
+        class="audioplayer__playlist-btn"
+        [ngSwitch]="repeatType"
+        (click)="changeRepeatFunc()"
+      >
+        <img
+          *ngSwitchCase="0"
+          src="../../../assets/img/icons/audioplayer/repeat.svg"
+          alt=""
+        />
+        <img
+          *ngSwitchCase="1"
+          src="../../../assets/img/icons/audioplayer/repeat-once.svg"
+          alt=""
+        />
+        <img
+          *ngSwitchCase="2"
+          src="../../../assets/img/icons/audioplayer/repeat-always.svg"
+          alt=""
+        />
+      </button>
+      <button
+        (click)="playPrevLecture()"
+        [disabled]="isPrevBtnDisabled"
+        class="audioplayer__playlist-btn"
+      >
+        <img
+          src="../../../assets/img/icons/audioplayer/prev.svg"
+          title="prev lecture"
+          alt=""
+        />
+      </button>
+      <button (click)="goBackward()" class="audioplayer__playlist-btn">
+        <img
+          src="../../../assets/img/icons/audioplayer/backward.svg"
+          title="10 seconds backward"
+          alt=""
+        />
+      </button>
+      <button (click)="goForward()" class="audioplayer__playlist-btn">
+        <img
+          src="../../../assets/img/icons/audioplayer/forward.svg"
+          title="10 seconds forward"
+          alt=""
+        />
+      </button>
+      <button
+        (click)="playNextLecture()"
+        [disabled]="isNextBtnDisabled"
+        class="audioplayer__playlist-btn"
+      >
+        <img
+          src="../../../assets/img/icons/audioplayer/next.svg"
+          title="next lecture"
+          alt=""
+        />
+      </button>
+    </div>
+    <video
+      #audioplayer
+      class="video-js"
+      controls
+      muted
+      playsinline
+      preload="none"
+    ></video>
+    <div
+      class="
+        audioplayer__playlist-btns audioplayer__playlist-btns--large-spaces
+      "
+    >
+      <button
+        class="audioplayer__playlist-btn"
+        (click)="toggleFavorite()"
+        [ngSwitch]="isLectureFavorite"
+      >
+        <img
+          *ngSwitchCase="false"
+          src="../../../assets/img/icons/audioplayer/like.svg"
+          height="18px"
+          alt="add to favorites"
+          title="add to favorites"
+        />
+        <img
+          *ngSwitchCase="true"
+          src="../../../assets/img/icons/audioplayer/like-filled.svg"
+          height="18px"
+          alt="remove from favorites"
+          title="remove from favorites"
+        />
+      </button>
+      <button class="audioplayer__playlist-btn" (click)="shareLink()">
+        <img
+          src="../../../assets/img/icons/share.svg"
+          height="18px"
+          alt="share"
+          title="share"
+        />
+      </button>
+      <button
+        [tuiDropdownContent]="dropdownContent"
+        [tuiDropdown]="isMoreOptionsOpen"
+        (click)="toggleMoreOptions()"
+        #moreOptionsBtn
+        class="audioplayer__playlist-btn"
+      >
+        <img
+          src="../../../assets/img/icons/audioplayer/more-options.svg"
+          height="18px"
+          alt="more options"
+          title="more options"
+        />
+      </button>
+      <ng-template #dropdownContent>
+        <ul class="dropdown">
+          <li class="dropdown__item" (click)="downloadLecture()">
+            <tui-svg
+              class="dropdown__item-icon"
+              src="tuiIconDownloadLarge"
+            ></tui-svg>
+            <span>Download</span>
+          </li>
+          <li class="dropdown__item" (click)="toggleComplete()">
+            <tui-svg
+              class="dropdown__item-icon"
+              src="tuiIconCheckLarge"
+            ></tui-svg>
+            <span>
+              {{
+                lectureProgressData.isCompleted
+                  ? "Reset completion"
+                  : "Mark as complete"
+              }}
+            </span>
+          </li>
+          <li class="dropdown__item" (click)="addToPlaylist()">
+            <tui-svg
+              class="dropdown__item-icon"
+              src="./../../../assets/img/sprite.svg#playlists"
+            ></tui-svg>
+            <span>Add to Playlist</span>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </div>
+</div>

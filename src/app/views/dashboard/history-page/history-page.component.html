@@ -1,0 +1,115 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">History</h2>
+  <form [formGroup]="form" class="dashboard-head__filters-wrapper">
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Period</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="historyRequest"
+        (ngModelChange)="sortLecturesByPeriod()"
+        formControlName="history"
+      >
+        All history
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="['All history', 'This week', 'This month']"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Playback Mode</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="showRequest"
+        formControlName="show"
+      >
+        All lectures
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="['Audio only (all lectures)', 'Only lectures with video']"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <!-- /.select-wrapper -->
+    <div class="select-wrapper tui-space_right-6">
+      <h5 class="select-wrapper__text">Sort by</h5>
+      <tui-select
+        class="select-wrapper__select"
+        tuiTextfieldSize="s"
+        [(ngModel)]="sortRequest"
+        formControlName="sort"
+      >
+        Default View View
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="[
+            'Default View View',
+            'Duration (low to high)',
+            'Duration (high to low)',
+            'Rec date (oldest)',
+            'Rec date (latest)',
+            'Alphabetically (A-Z)',
+            'Alphabetically (Z-A)'
+          ]"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </div>
+    <!-- /.select-wrapper -->
+    <div class="select-wrapper tui-space_right-6">
+      <div class="filter-badge" *ngIf="activeFiltersCount">
+        {{ activeFiltersCount }}
+      </div>
+      <button
+        (click)="showDialog()"
+        tuiButton
+        icon="./../../../assets/img/sprite.svg#filter"
+        appearance="outline"
+        type="button"
+        size="s"
+      >
+        Filters
+      </button>
+    </div>
+    <div class="select-wrapper">
+      <button
+        (click)="clearHistory()"
+        tuiButton
+        appearance="outline"
+        type="button"
+        size="s"
+      >
+        Clear history
+      </button>
+    </div>
+    <!-- /.select-wrapper -->
+  </form>
+  <!-- /.dashboard-head__filters-wrapper -->
+</div>
+<!-- /.dashboard-head -->
+<tui-scrollbar class="dashboard__wrapper categories" appPagination>
+  <div *ngIf="isSortRequests()" class="lectures-wrapper">
+    <app-lecture-post
+      [lectureData]="lecture"
+      (onLectureClick)="interractWithLecture(lecture, lectures, i)"
+      *ngFor="let lecture of lectures; index as i"
+    ></app-lecture-post>
+  </div>
+
+  <ng-template [ngIf]="!historyLecturesIsLoaded">
+    <tui-loader
+      [showLoader]="contentLoader"
+      [overlay]="true"
+      size="xxl"
+      [inheritColor]="true"
+      class="content-loader"
+    >
+    </tui-loader>
+  </ng-template>
+
+  <app-lectures
+    *ngIf="!isSortRequests()"
+    [allLectures]="sortedLectures"
+  ></app-lectures>
+</tui-scrollbar>

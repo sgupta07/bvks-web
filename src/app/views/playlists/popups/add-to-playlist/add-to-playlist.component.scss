@@ -1,0 +1,63 @@
+.playlist-dialog {
+  padding-top: 30px;
+
+  &__search {
+    margin-bottom: 26px;
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &-icon {
+      color: #a4a5b1;
+    }
+  }
+
+  &__content {
+    display: flex;
+    max-height: 280px;
+  }
+
+  &__scroll {
+    width: 100%;
+    max-height: 120px;
+    margin-bottom: 34px;
+    padding-left: 14px;
+    overflow-y: scroll;
+  }
+  &__create-playlist {
+    margin-bottom: 36px;
+  }
+}
+
+::ng-deep {
+  .playlist-variant {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+    cursor: pointer;
+    &__text {
+      display: flex;
+      align-items: center;
+    }
+
+    legend {
+      padding-left: 16px;
+    }
+    &__checkbox {
+      tui-wrapper[data-appearance="primary"] {
+        background-color: var(--tui-support-08) !important;
+      }
+    }
+  }
+}
+
+tui-wrapper[data-appearance="primary"],
+tui-wrapper[data-state="hovered"] {
+  background-color: var(--tui-support-08);
+}

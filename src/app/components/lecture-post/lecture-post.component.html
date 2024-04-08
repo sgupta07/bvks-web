@@ -1,0 +1,158 @@
+<article class="lecture">
+  <div
+    [class.isSelected]="isSelected()"
+    class="lecture__img-wrapper"
+    [class]="{ 'tui-skeleton': showSkeleton }"
+    (click)="interrractWithLecture()"
+  >
+    <div class="lecture__favorite-btn" *ngIf="isLectureInFavorites()">
+      <tui-svg
+        class="icon"
+        src="./../../../assets/img/sprite.svg#heart-filled"
+      ></tui-svg>
+    </div>
+    <img
+      class="lecture__img"
+      [src]="checkLectureImage()"
+      alt=""
+      (load)="hideSkeleton()"
+    />
+    <legend class="lecture__length">
+      {{ lectureData?.length | time }}
+    </legend>
+    <legend class="lecture__length lecture__length_progress">
+      {{ progress | lectureProgress }}
+      <span *ngIf="count">| {{ count | lectureCount }}</span>
+    </legend>
+  </div>
+  <!-- /.lecture__img-wrapper -->
+  <div class="lecture__text-wrapper">
+    <button
+      #button
+      [tuiDropdownContent]="otherDropdown"
+      [tuiDropdown]="isDropdownActive"
+      class="lecture__other"
+      [class.lecture__other_active]="isDropdownActive"
+      (click)="toggleDropdown()"
+    >
+      <tui-svg class="lecture__other-icon" src="tuiIconMoreVertLarge"></tui-svg>
+    </button>
+    <ng-template #otherDropdown>
+      <ul class="dropdown">
+        <li
+          *ngIf="!isLectureInFavorites()"
+          class="dropdown__item tui-text_body-m"
+          (click)="toggleFavorites()"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconHeartLarge"
+          ></tui-svg>
+          Add to favorites
+        </li>
+        <li
+          *ngIf="isLectureInFavorites()"
+          class="dropdown__item tui-text_body-m"
+          (click)="toggleFavorites()"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconHeartLarge"
+          ></tui-svg>
+          Remove from favorites
+        </li>
+        <li class="dropdown__item tui-text_body-m" (click)="downloadLecture()">
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconDownloadLarge"
+          ></tui-svg>
+          Download
+        </li>
+        <li
+          class="dropdown__item tui-text_body-m"
+          (click)="progress === 100 ? resetCompletion() : markAsComplete()"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconCheckLarge"
+          ></tui-svg>
+          {{ progress === 100 ? "Reset completion" : "Mark as complete" }}
+        </li>
+        <li class="dropdown__item tui-text_body-m" (click)="addToPlaylist()">
+          <tui-svg
+            class="dropdown__item-icon"
+            src="./../../../assets/img/sprite.svg#playlists"
+          ></tui-svg>
+          Add to Playlist
+        </li>
+        <li
+          (click)="openMoreInfoDialog()"
+          class="dropdown__item tui-text_body-m"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="./../../../assets/img/sprite.svg#about"
+          ></tui-svg>
+          More info
+        </li>
+        <li
+          (click)="
+            shareLink(
+              lectureData?.id,
+              0,
+              !!lectureData?.resources?.videos?.length
+            )
+          "
+          class="dropdown__item tui-text_body-m"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="./../../../assets/img/sprite.svg#share"
+          ></tui-svg>
+          Share
+        </li>
+        <li
+          class="dropdown__item tui-text_body-m"
+          *ngIf="isFromMyPlaylist"
+          (click)="removeFromPlaylist()"
+        >
+          <tui-svg
+            class="dropdown__item-icon"
+            src="tuiIconTrashLarge"
+          ></tui-svg>
+          Remove from Playlist
+        </li>
+      </ul>
+    </ng-template>
+    <h3
+      class="lecture__title"
+      [class]="{
+        'tui-skeleton': showSkeleton,
+        'tui-skeleton_text': showSkeleton
+      }"
+    >
+      {{ lectureTitle }}
+    </h3>
+    <span
+      [class]="{
+        'tui-skeleton': showSkeleton,
+        'tui-skeleton_text': showSkeleton,
+        'tui-skeleton_short': showSkeleton
+      }"
+      >{{ lectureData.dateOfRecording.day }}/{{
+        lectureData.dateOfRecording.month
+      }}/{{ lectureData.dateOfRecording.year }} ·
+      {{ lectureData.category?.length ? lectureData.category[0] : "" }}
+    </span>
+    <p
+      [class]="{
+        'tui-skeleton': showSkeleton,
+        'tui-skeleton_text': showSkeleton,
+        'tui-skeleton_short': showSkeleton
+      }"
+    >
+      {{ lectureData.legacyData?.verse }}
+    </p>
+  </div>
+  <!-- /.lecture__img-wrapper -->
+</article>

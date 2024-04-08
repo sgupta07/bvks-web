@@ -1,0 +1,55 @@
+:host {
+  display: block;
+}
+
+.ticket {
+  padding: 8px 24px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  &_link {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+
+  & h4 {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 700px;
+  }
+
+  &__info {
+    font-size: 14px;
+    line-height: 16px;
+    color: #343a40;
+    flex-shrink: 0;
+  }
+
+  &__withIconBlock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    & > img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

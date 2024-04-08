@@ -1,0 +1,50 @@
+.donate-form {
+  max-width: 900px;
+  padding-right: 30px;
+  padding-bottom: 96px;
+  &__title {
+    padding-bottom: 24px;
+    font-weight: bold;
+  }
+
+  &__radio-group {
+    label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        padding-bottom: 16px;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__adress {
+    display: flex;
+
+    &-input {
+      width: 150px;
+      margin-right: 20px;
+    }
+  }
+}
+
+.donate {
+  padding-bottom: 200px;
+
+  &__text {
+    max-width: 647px;
+    padding-bottom: 24px;
+  }
+
+  &__postscript {
+    a {
+      color: var(--tui-support-08);
+      text-decoration: none;
+    }
+  }
+}

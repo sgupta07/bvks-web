@@ -1,0 +1,37 @@
+<aside class="sidebar" [class.active]="isMenuActive">
+  <ul class="sidebar-group">
+    <li class="sidebar-group__item" *ngFor="let link of sidebarLinksGroup1">
+      <a
+        class="sidebar-group__item-link"
+        [routerLink]="link.link"
+        routerLinkActive="sidebar-group__item-link--active"
+      >
+        <tui-svg class="icon" [src]="link.iconPath"></tui-svg>
+        <span
+          class="sidebar-group__item-span tui-text_body-s"
+          *ngIf="isMenuActive"
+          >{{ link.text }}</span
+        >
+      </a>
+    </li>
+    <!-- /.sidebar-group__item -->
+  </ul>
+  <!-- /.sidebar-group -->
+  <ul class="sidebar-group">
+    <li class="sidebar-group__item" *ngFor="let link of sidebarLinksGroup2">
+      <a
+        class="sidebar-group__item-link"
+        [routerLink]="link.link"
+        routerLinkActive="sidebar-group__item-link--active"
+      >
+        <tui-svg class="icon" [src]="link.iconPath"></tui-svg>
+        <span class="sidebar-group__item-span tui-text_body-s">{{
+          link.text
+        }}</span>
+      </a>
+    </li>
+    <!-- /.sidebar-group__item -->
+  </ul>
+  <!-- /.sidebar-group -->
+</aside>
+<!-- /.sidebar -->

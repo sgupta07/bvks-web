@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.adminEdits {
+  height: 100%;
+  margin-top: 16px;
+  padding-right: 112px;
+  padding-left: 112px;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__ticketTabs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-rows: auto;
+    margin-top: 16px;
+    row-gap: 16px;
+  }
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2;
+  width: 20rem;
+  max-height: 20rem;
+  padding: 1rem;
+  overflow-y: scroll;
+  background-color: #fff;
+  border: slategray 1px solid;
+  border-radius: 20px;
+}
+
+.search-dropdown-lecture {
+  padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: slategray;
+  }
+}
+
+.search-content {
+  position: relative;
+}
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  &__field {
+    width: 20rem;
+  }
+}

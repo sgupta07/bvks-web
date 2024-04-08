@@ -1,0 +1,15 @@
+.lecture-info {
+  position: relative;
+  &__close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &-icon {
+      color: #a4a5b1;
+    }
+  }
+}

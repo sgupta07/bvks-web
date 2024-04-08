@@ -1,0 +1,69 @@
+.adminHeader {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+
+  &__menuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+
+    & > img {
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      border-radius: 100%;
+    }
+
+    & > span {
+      margin-left: 16px;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+}
+
+.admin-links {
+  display: flex;
+  gap: 1rem;
+  margin: 0 2rem;
+  cursor: pointer;
+  div {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &--active {
+    color: var(--tui-support-08);
+    span {
+      color: var(--tui-support-08);
+      font-weight: bold;
+    }
+  }
+}
+
+.logout-btn {
+  display: block;
+  width: 10rem !important;
+  margin-top: 0.7rem;
+  margin-left: auto;
+  padding: 0 1rem !important;
+  color: rgb(197, 2, 2) !important;
+  white-space: nowrap;
+  text-wrap: nowrap;
+  border-color: rgb(197, 2, 2) !important;
+}

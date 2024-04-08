@@ -1,0 +1,72 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Settings</h2>
+</div>
+<tui-scrollbar class="dashboard__wrapper settings">
+  <div class="settings__title">
+    <p class="tui-text_body-s">
+      Choose the language(s) you wish to get notifications for:
+    </p>
+  </div>
+  <div class="settings__toggles tui-space_top-4">
+    <!-- Checkboxes -->
+    <div
+      class="settings__toggle-wrapper tui-space_bottom-2"
+      [class.tui-skeleton]="skeletonVisible"
+    >
+      <tui-toggle
+        [(ngModel)]="englishCheck"
+        (ngModelChange)="handleCheckboxSubcription('english', $event)"
+        size="l"
+        id="englishCheck"
+        checked="false"
+      >
+      </tui-toggle>
+      <label
+        for="englishCheck"
+        tui-label
+        class="tui-text_body-m tui-space_left-3"
+        >English</label
+      >
+    </div>
+    <div
+      class="settings__toggle-wrapper tui-space_bottom-2"
+      [class.tui-skeleton]="skeletonVisible"
+    >
+      <tui-toggle
+        [(ngModel)]="hindiCheck"
+        (ngModelChange)="handleCheckboxSubcription('hindi', $event)"
+        appearance="primary-orange"
+        size="l"
+        name="hindiCheck"
+        checked="false"
+      >
+      </tui-toggle>
+      <label
+        for="englishCheck"
+        tui-label
+        class="tui-text_body-m tui-space_left-3"
+        >Hindi</label
+      >
+    </div>
+    <div
+      class="settings__toggle-wrapper tui-space_bottom-2"
+      [class.tui-skeleton]="skeletonVisible"
+    >
+      <tui-toggle
+        [(ngModel)]="bengaliCheck"
+        (ngModelChange)="handleCheckboxSubcription('bengali', $event)"
+        appearance="primary-orange"
+        size="l"
+        name="bengaliCheck"
+        checked="false"
+      >
+      </tui-toggle>
+      <label
+        for="englishCheck"
+        tui-label
+        class="tui-text_body-m tui-space_left-3"
+        >Bengali</label
+      >
+    </div>
+  </div>
+</tui-scrollbar>

@@ -1,0 +1,21 @@
+<div class="thanks-popup thanks-popup_pos">
+  <div class="thanks-popup__content-wrapper">
+    <div class="thanks-popup__img-wrapper">
+      <img
+        src="../../../../../assets/icons/success.svg"
+        alt="Success icon"
+        class="thanks-popup__img"
+      />
+    </div>
+    <!-- /.thanks-popup__img-wrapper -->
+    <h3 class="thanks-popup__text">
+      Thank you! We have received your donation.
+    </h3>
+
+    <button (click)="closePopup()" class="thanks-popup__button">Ok</button>
+  </div>
+  <!-- /.thanks-popup__content-wrapper -->
+  <div (click)="closePopup()" class="thanks-popup__overlay"></div>
+  <!-- /.thanks-popup__overlay -->
+</div>
+<!-- /.thanks-popup -->

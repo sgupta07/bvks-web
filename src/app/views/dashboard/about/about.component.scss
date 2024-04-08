@@ -1,0 +1,75 @@
+::ng-deep {
+  .about {
+    &__text-group {
+      display: flex;
+      width: inherit;
+      padding-right: 32px;
+
+      &:not(:last-child) {
+        margin-bottom: 50px;
+      }
+
+      .about__photo {
+        max-height: 500px;
+        margin-left: auto;
+        object-fit: cover;
+      }
+    }
+
+    .about__text-group--reverse {
+      .about__photo {
+        padding-right: 100px;
+        padding-left: 0;
+      }
+    }
+
+    .about__photo {
+      padding-left: 100px;
+    }
+
+    &__link {
+      margin-bottom: 40px;
+      color: var(--tui-support-08);
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.4s;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .text-wrapper {
+    &__text {
+      &:not(:last-child) {
+        padding-bottom: 30px;
+      }
+
+      &--bold {
+        font-weight: bold;
+      }
+    }
+
+    &__title {
+      padding: 10px 0 20px;
+    }
+
+    &__sub-title {
+      opacity: 0.5;
+    }
+  }
+
+  .about-photos {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: 30px;
+    overflow: hidden;
+
+    &__photo {
+      width: calc(100% / 6 - 20px);
+    }
+  }
+}

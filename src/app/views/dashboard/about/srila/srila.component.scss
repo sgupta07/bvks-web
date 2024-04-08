@@ -1,0 +1,13 @@
+.about__text-group {
+  margin-bottom: 30px;
+}
+
+.about__text-group {
+  &:first-of-type {
+    margin-top: 40px;
+  }
+
+  .about__photo {
+    object-fit: contain;
+  }
+}

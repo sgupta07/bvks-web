@@ -1,0 +1,40 @@
+<div class="adminLogin container">
+  <form
+    class="form adminLogin__form"
+    [formGroup]="loginForm"
+    (ngSubmit)="onLogin()"
+  >
+    <h3>Admin login</h3>
+    <tui-input
+      tuiTextfieldExampleText="Enter your email"
+      formControlName="email"
+      tuiTextfieldSize="m"
+      class="form__input"
+      tuiHintContent="Email"
+      #email
+    >
+      E-mail
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Enter your password"
+      formControlName="password"
+      tuiTextfieldType="password"
+      class="form__input"
+      tuiTextfieldSize="m"
+      tuiHintContent="Password"
+      #password
+    >
+      Password
+    </tui-input>
+    <button
+      tuiButton
+      type="submit"
+      size="m"
+      class="form__button"
+      appearance="primary-orange"
+      [disabled]="loginForm.invalid"
+    >
+      Sign In
+    </button>
+  </form>
+</div>

@@ -1,0 +1,257 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Donate</h2>
+</div>
+<!-- /.dashboard-head -->
+<tui-scrollbar class="dashboard__wrapper donate">
+  <p class="donate__text tui-text_body-m">
+    Donations are welcome for the upkeep of this site and for all other programs
+    that His Holiness Bhakti Vikasa Swami is involved in.
+  </p>
+  <form class="donate-form" [formGroup]="form">
+    <h3 class="donate-form__title tui-text_h4">Dontation Form</h3>
+
+    <div class="donate-form__radio-group">
+      <label>
+        <tui-radio
+          (change)="selectCitizenType(0)"
+          formControlName="citizen"
+          class="tui-space_right-3"
+          item="citizenOne"
+        >
+        </tui-radio>
+
+        I am a citizen of Indian/I am an NRI
+      </label>
+      <label>
+        <tui-radio
+          (change)="selectCitizenType(1)"
+          formControlName="citizen"
+          class="tui-space_right-3"
+          item="citizenTwo"
+        >
+        </tui-radio>
+
+        I am an overseas citizen of India (OCI)
+      </label>
+      <label>
+        <tui-radio
+          (change)="selectCitizenType(2)"
+          formControlName="citizen"
+          class="tui-space_right-3"
+          item="citizenThree"
+        >
+        </tui-radio>
+
+        I am not a citizen of India
+      </label>
+    </div>
+    <!-- /.donate-form__radio-group -->
+
+    <div class="donate-form__radio-group" *ngIf="citizenType === 0">
+      <h4 class="donate-form__title tui-text_h6">How do you want to donate?</h4>
+
+      <label>
+        <tui-radio
+          (change)="selectBankType(0)"
+          formControlName="bank"
+          class="tui-space_right-3"
+          item="bankOne"
+        >
+        </tui-radio>
+
+        Donating from an Indian Bank Account
+      </label>
+
+      <label>
+        <tui-radio
+          (change)="selectBankType(1)"
+          formControlName="bank"
+          class="tui-space_right-3"
+          item="bankTwo"
+        >
+        </tui-radio>
+
+        Donating from a non-indian Bank Account
+      </label>
+    </div>
+    <!-- /.donate-form__radio-group -->
+    <div
+      class="donate-form__radio-group"
+      *ngIf="citizenType === 1 || citizenType === 2 || bankType === 0"
+    >
+      <h4 class="donate-form__title tui-text_h6">
+        Please select your payment method
+      </h4>
+      <label>
+        <tui-radio
+          (change)="selectPaymentType(0)"
+          formControlName="payment"
+          class="tui-space_right-3"
+          item="paymentOne"
+        >
+        </tui-radio>
+
+        Payment Gateway
+      </label>
+      <label>
+        <tui-radio
+          (change)="selectPaymentType(1)"
+          formControlName="payment"
+          class="tui-space_right-3"
+          item="paymentTwo"
+        >
+        </tui-radio>
+
+        Direct Bank Transfer
+      </label>
+    </div>
+    <!-- /.donate-form__radio-group -->
+    <div class="donate-form__inputs-group" *ngIf="paymentType === 0">
+      <tui-input
+        tuiTextfieldSize="m"
+        formControlName="name"
+        class="tui-space_bottom-3"
+      >
+        Name
+      </tui-input>
+
+      <tui-input
+        tuiTextfieldSize="m"
+        formControlName="email"
+        class="tui-space_bottom-3"
+      >
+        Email
+      </tui-input>
+
+      <tui-input-phone-international
+        tuiTextfieldSize="m"
+        class="tui-space_bottom-3"
+        formControlName="phone"
+        [countries]="countries"
+        [(countryIsoCode)]="countryIsoCode"
+      >
+        PhoneNumber
+      </tui-input-phone-international>
+
+      <h4 class="tui-space_bottom-3 tui-text_h6">Currency</h4>
+
+      <tui-select
+        tuiTextfieldSize="m"
+        formControlName="currencyType"
+        class="tui-space_bottom-3"
+      >
+        Choose your currency
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="bankType === 0 ? ['INR (Indian rupee)'] : currencies"
+        ></tui-data-list-wrapper>
+      </tui-select>
+
+      <tui-input-number
+        formControlName="amount"
+        tuiTextfieldSize="m"
+        class="tui-space_bottom-3"
+      >
+        Amount
+      </tui-input-number>
+      <h4 class="tui-space_bottom-3 tui-text_h6">Donate for</h4>
+
+      <tui-select
+        class="tui-space_bottom-3"
+        tuiTextfieldSize="m"
+        formControlName="donateFor"
+      >
+        Choose your option
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="donateForVariants"
+        ></tui-data-list-wrapper>
+      </tui-select>
+
+      <tui-input
+        *ngIf="form.get('donateFor').value === 'Other(s)'"
+        class="tui-space_bottom-3"
+        tuiTextfieldSize="m"
+        formControlName="others"
+      >
+        Please Specify
+      </tui-input>
+
+      <tui-input
+        class="tui-space_bottom-3"
+        tuiTextfieldSize="m"
+        formControlName="address"
+      >
+        Address
+      </tui-input>
+      <div class="donate-form__adress tui-space_bottom-5">
+        <tui-input
+          class="donate-form__adress-input"
+          tuiTextfieldSize="m"
+          formControlName="city"
+        >
+          City
+        </tui-input>
+
+        <tui-input
+          class="donate-form__adress-input"
+          tuiTextfieldSize="m"
+          formControlName="state"
+        >
+          State
+        </tui-input>
+
+        <tui-input
+          class="donate-form__adress-input"
+          tuiTextfieldSize="m"
+          formControlName="zip"
+        >
+          Zip
+        </tui-input>
+      </div>
+      <!-- /.donate-form__adress -->
+
+      <button
+        [disabled]="!form.valid"
+        (click)="createPayment()"
+        tuiButton
+        type="button"
+        appearance="primary-orange"
+      >
+        Continue
+      </button>
+    </div>
+    <!-- /.donate-form__inputs-group -->
+    <div
+      class="donate__donate-text tui-space_bottom-4"
+      *ngIf="paymentType === 1"
+    >
+      <p class="tui-space_bottom-2">For direct bank transfer:</p>
+      <p>Beneficiary name: Bhagavat Shikshan Evam Gauraksha Trust</p>
+      <p>State Bank of India - New Delhi branch.</p>
+      <p>Account number: 40069468563</p>
+      <p>IFS Code : SBI0000691</p>
+      <p>Swift code : SBININBB104</p>
+    </div>
+    <!-- /.donate__donate-text -->
+  </form>
+  <!-- /.donate-form -->
+  <div class="donate__donate-text tui-space_bottom-4" *ngIf="bankType === 1">
+    <p class="tui-space_bottom-2">Kindly get in touch with us:</p>
+
+    <p>Email: hrsikesadasa.bvks@gmail.com</p>
+    <p>Phone/WhatsApp: +917415128866</p>
+  </div>
+  <!-- /.donate__donate-text -->
+  <span class="donate__postscript"
+    >If you face any difficulty while donating, please contact us: <br>
+    Email: <a href="mailto:hrsikesadasa.bvks@gmail.com">hrsikesadasa.bvks@gmail.com</a> <br>
+    WhatsApp and Regular phone calls: <a href="tel:+917415128866">+91 7415128866</a>
+  </span
+  >
+</tui-scrollbar>
+
+<app-thank-you-popup
+  *ngIf="isSuccessPopupActive"
+  (onClose)="toggleSuccessPopup(false)"
+></app-thank-you-popup>

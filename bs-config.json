@@ -1,0 +1,8 @@
+{
+  "ghostMode": false,
+  "notify": false,
+  "server": {
+    "baseDir": "dist/project/browser"
+  },
+  "open": false
+}

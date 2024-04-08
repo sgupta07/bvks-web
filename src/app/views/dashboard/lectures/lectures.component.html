@@ -1,0 +1,24 @@
+<div class="lectures">
+  <ng-container *ngIf="!isLecturesLoading; else contentLoader">
+    <div class="lectures-wrapper" appPagination>
+      <app-lecture-post
+        *ngFor="let lecture of lecturesData; index as i"
+        [lectureData]="lecture"
+        [count]="countById(lecture.id)"
+        [isFromMyPlaylist]="isMyPlaylist"
+        (onLectureClick)="interractWithLecture(lecture, lecturesData, i)"
+        [playlistID]="playlistID"
+      ></app-lecture-post></div
+  ></ng-container>
+
+  <ng-template #contentLoader>
+    <tui-loader
+      [showLoader]="contentLoader"
+      [overlay]="true"
+      size="xxl"
+      [inheritColor]="true"
+      class="content-loader"
+    >
+    </tui-loader>
+  </ng-template>
+</div>

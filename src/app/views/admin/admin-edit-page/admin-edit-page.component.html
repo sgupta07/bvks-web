@@ -1,0 +1,59 @@
+<main class="container editPage">
+  <section class="editMain">
+    <p class="text-error" *ngIf="loadTextError">{{ loadTextError }}</p>
+    <div class="editMain__header">
+      <h2 class="tui-text_h4">{{ title }}</h2>
+    </div>
+
+    <div class="editMain__body" #transcriptBody>
+      <p class="transcription" #transcriptEl>{{ transcript }}</p>
+
+      <div
+        class="editPopover"
+        [ngStyle]="{
+          top: popoverPosition.top + 'px',
+          left: popoverPosition.left + 'px',
+          opacity: selectedEdit ? 1 : 0,
+          pointerEvents: selectedEdit ? 'all' : 'none'
+        }"
+        #popoverEl
+      >
+        <p>{{ selectedEdit?.newText }}</p>
+        <div class="editPopover__buttons">
+          <button
+            tuiButton
+            appearance="outline"
+            size="s"
+            (click)="rejectEdit()"
+          >
+            Reject
+          </button>
+          <button tuiButton size="s" (click)="acceptEdit()">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="editMain__info">
+      <div *ngFor="let item of info" class="editInfoItem">
+        <h3>{{ item.head }}</h3>
+        <p>{{ item.text }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="editSide">
+    <h2 class="tui-text_h4">Suggested</h2>
+    <div class="editSide__wrapper">
+      <p *ngIf="edits.length === 0">No edits was found for this lecture.</p>
+      <article
+        *ngFor="let edit of edits"
+        class="suggestedItem"
+        [ngClass]="edit.id === selectedEdit?.id && 'suggestedItem_active'"
+        (click)="selectEdit(edit)"
+      >
+        <p>{{ edit.oldText }}</p>
+        <p>{{ edit.newText }}</p>
+      </article>
+    </div>
+  </section>
+</main>

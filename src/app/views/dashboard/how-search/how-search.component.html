@@ -1,0 +1,184 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">
+    How to search transcriptions
+  </h2>
+</div>
+<tui-scrollbar class="dashboard__wrapper how-to-search__wrapper">
+  <div class="col-12 col-md-7 how-to-search__content">
+    <div class="block-paragraph">
+      <p>
+        <i
+          >Following are some examples of the different features of the
+          search:</i
+        >
+      </p>
+      <h4>Phrases:</h4>
+      <p>
+        Phrase Search allows you to search for documents containing an exact
+        sentence or phrase rather than comparing a set of keywords in random
+        order. To use phrase search use quotation marks (") around a specific
+        phrase:
+      </p>
+      <p>
+        <a
+          href="https://vedabase.io/en/search/?query=%22Krsna+is+never+alone%22"
+          >"Krsna is never alone"</a
+        >
+      </p>
+      <h4>Wildcards:</h4>
+      <p>
+        Search supports single and multiple character wildcard searches within
+        single terms (not within phrase queries).
+      </p>
+      <p>To perform a single character wildcard search use the "?" symbol.</p>
+      <p>To perform a multiple character wildcard search use the "*" symbol.</p>
+      <p>
+        The single character wildcard search looks for terms that match that
+        with the single character replaced. For example, to search for "text" or
+        "test" you can use the search:
+      </p>
+      <p><a href="https://vedabase.io/en/search/?query=te%3Ft">te?t</a></p>
+      <p>
+        Multiple character wildcard searches looks for 0 or more characters. For
+        example, to search for Hari, Harinama or Haridāsa, you can use the
+        search:
+      </p>
+      <p><a href="https://vedabase.io/en/search/?query=hari*">hari*</a></p>
+      <p>You can also use the wildcard searches in the middle of a term.</p>
+      <p><a href="https://vedabase.io/en/search/?query=pre*us">pre*us</a></p>
+      <p>
+        Note: You cannot use a * or ? symbol as the first character of a search.
+      </p>
+      <h4>Proximity search:</h4>
+      <p>
+        Vedabase search supports finding words are a within a specific distance
+        away. To do a proximity search use the tilde, "~", symbol at the end of
+        a Phrase. For example to search for a "paraphenalia" and "king" within 4
+        words of each other in a document use the search:
+      </p>
+      <p>
+        <a
+          href="https://vedabase.io/en/search/?query=%22paraphernalia+king%22~4"
+          >"paraphernalia king"~4</a
+        >
+      </p>
+      <h4>Boolean:</h4>
+      <p>
+        Boolean operators allow terms to be combined through logic operators.
+        Search supports AND, "+", OR, NOT as Boolean operators (Note: Boolean
+        operators must be ALL CAPS).
+      </p>
+      <h5>OR</h5>
+      <p>
+        The OR operator is the default conjunction operator. This means that if
+        there is no Boolean operator between two terms, the OR operator is used.
+        The OR operator links two terms and finds a matching document if either
+        of the terms exist in a document. This is equivalent to a union using
+        sets.
+      </p>
+      <p>
+        To search for documents that contain either "krsna" or "cow" use the
+        query:
+      </p>
+      <p>
+        <a href="https://vedabase.io/en/search/?query=krsna+cow">krsna cow</a>
+      </p>
+      <p>or</p>
+      <p>
+        <a href="https://vedabase.io/en/search/?query=krsna+OR+cow"
+          >krsna OR cow</a
+        >
+      </p>
+      <h5>AND</h5>
+      <p>
+        The AND operator matches documents where both terms exist anywhere in
+        the text of a single document. This is equivalent to an intersection
+        using sets.
+      </p>
+      <p>
+        To search for documents that contain "practical application" and
+        "control of the mind" use the query:
+      </p>
+      <p>
+        <a
+          href="https://vedabase.io/en/search/?query=%22practical+application%22+AND+%22control+of+the+mind%22"
+          >"practical application" AND "control of the mind"</a
+        >
+      </p>
+      <h5>+ (plus)</h5>
+      <p>
+        The "+" or required operator requires that the term after the "+" symbol
+        exist somewhere in a the field of a single document.
+      </p>
+      <p>
+        To search for documents that must contain "pure" and may contain
+        "devotion" use the query:
+      </p>
+      <p>
+        <a href="https://vedabase.io/en/search/?query=%2Bpure+devotion"
+          >+pure devotion</a
+        >
+      </p>
+      <h5>NOT</h5>
+      <p>
+        The NOT operator excludes documents that contain the term after NOT.
+        This is equivalent to a difference using sets. The symbol ! can be used
+        in place of the word NOT.
+      </p>
+      <p>
+        To search for documents that contain "pure devotional service" but not
+        "mixed devotional service" use the query:
+      </p>
+      <p>
+        <a
+          href="https://vedabase.io/en/search/?query=%22pure+devotional+service%22+NOT+%22mixed+devotional+service%22"
+          >"pure devotional service" NOT "mixed devotional service"</a
+        >
+      </p>
+      <p>
+        Note: The NOT operator cannot be used with just one term. For example,
+        the following search will return no results:
+      </p>
+      <p>NOT "mixed devotional service"</p>
+      <h4>Boosting:</h4>
+      <p>
+        Search engine provides the relevance level of matching documents based
+        on the terms found. To boost a term use the caret, "^", symbol with a
+        boost factor (a number) at the end of the term you are searching. The
+        higher the boost factor, the more relevant the term will be.
+      </p>
+      <p>
+        Boosting allows you to control the relevance of a document by boosting
+        its term. For example, if you are searching for
+      </p>
+      <p>
+        <a href="https://vedabase.io/en/search/?query=knowledge+education"
+          >knowledge&nbsp;education</a
+        >
+      </p>
+      <p>
+        and you want the term "knowledge" to be more relevant boost it using the
+        ^ symbol along with the boost factor next to the term. You would type:
+      </p>
+      <p>
+        <a href="https://vedabase.io/en/search/?query=knowledge%5E10+education"
+          >knowledge^10&nbsp;education</a
+        >
+      </p>
+      <p>
+        This will make documents with the term knowledge appear more relevant.
+        You can also boost Phrase Terms as in the example:
+      </p>
+      <p>
+        <a
+          href="https://vedabase.io/en/search/?query=%22pure+devotion%22%5E4+%22mixed+devotional+service%22"
+          >"pure devotion"^4 "mixed devotional service"</a
+        >
+      </p>
+      <p>
+        By default, the boost factor is 1. Although the boost factor must be
+        positive, it can be less than 1 (e.g. 0.2)
+      </p>
+    </div>
+  </div>
+</tui-scrollbar>

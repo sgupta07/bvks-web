@@ -1,0 +1,107 @@
+.filter {
+  padding-top: 30px;
+
+  &__close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &-icon {
+      color: #a4a5b1;
+    }
+  }
+
+  &__tabs {
+    width: max-content;
+    border-right: 1px solid var(--light-gray);
+  }
+
+  &__content {
+    display: flex;
+    max-height: 280px;
+  }
+
+  &__scroll {
+    width: 100%;
+    height: inherit;
+    padding-left: 14px;
+    overflow-y: scroll;
+  }
+}
+
+.filter-tab {
+  position: relative;
+  width: 120px;
+  padding: 10px 0;
+  cursor: pointer;
+
+  legend {
+    position: relative;
+    z-index: 2;
+  }
+
+  .active {
+    position: relative;
+  }
+
+  &--active::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -24px;
+    z-index: 1;
+    display: block;
+    width: calc(100% + 24px);
+    height: 100%;
+    background: var(--light-gray);
+    content: "";
+  }
+}
+
+::ng-deep {
+  .filter-variant {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+
+    legend {
+      padding-left: 16px;
+    }
+
+    &__checkbox {
+      tui-wrapper[data-appearance="primary"][data-state="hovered"] {
+        background-color: var(--tui-support-08) !important;
+      }
+    }
+  }
+}
+
+.filter__buttons-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.filter__button {
+  padding: 10px 24px;
+  color: rgba(27, 31, 59, 0.8);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &--apply {
+    color: var(--tui-support-08);
+  }
+}
+
+tui-wrapper[data-appearance="primary"],
+tui-wrapper[data-state="hovered"] {
+  background-color: var(--tui-support-08);
+}

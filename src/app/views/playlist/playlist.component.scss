@@ -1,0 +1,39 @@
+.playlist-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+    & > span {
+      width: 95px;
+      min-width: 0;
+      color: var(--gray-dark);
+      font-weight: normal;
+      font-size: 11px;
+      font-style: normal;
+      line-height: 16px;
+    }
+    & > p {
+      align-self: flex-start;
+      color: #000;
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+}
+.playlist-title {
+  display: flex;
+  align-items: center;
+  &__type {
+    width: 20px;
+    margin-right: 10px;
+  }
+  &__name {
+    margin-right: 10px;
+  }
+  & > button {
+    margin-top: 5px;
+  }
+}

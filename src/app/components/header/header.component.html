@@ -1,0 +1,147 @@
+<div class="header">
+  <div class="container header__container">
+    <button
+      (click)="toggleMenu()"
+      type="button"
+      class="menu-btn tui-space_right-6"
+    >
+      <tui-svg class="menu-btn__icon" src="tuiIconMenuLarge"></tui-svg>
+    </button>
+    <div
+      class="logo header__logo"
+      (click)="clearFilters()"
+      routerLink="/dashboard/categories"
+    >
+      <img
+        src="../../../assets/img/ava.jpg"
+        alt="Bhakti Vikasa Swami"
+        class="logo__img header__logo-img tui-space_right-4"
+      />
+
+      <h1 class="logo__title tui-text_h6">Bhakti Vikasa Swami</h1>
+      <button
+        tuiButton
+        appearance="primary"
+        type="button"
+        size="s"
+        leftIcon="tuiIconArrowLeft"
+        *ngIf="isBackBtnActive"
+        (click)="goToPreviousPage()"
+      >
+        Back
+      </button>
+    </div>
+    <!-- /.logo header__logo -->
+    <form
+      [formGroup]="form"
+      class="search header__search"
+      [class.search-hide]="isBackBtnActive"
+      [class.search-hide]="isSearchDisabled"
+      (ngSubmit)="searchLectures(search)"
+    >
+      <div class="form__block" *ngIf="isLecturesEmpty()"></div>
+      <!-- /.form__block -->
+      <tui-input
+        [(ngModel)]="search"
+        (ngModelChange)="onSearchLecturesChange(search)"
+        tuiTextfieldExampleText="Type your search request"
+        [tuiTextfieldCleaner]="true"
+        tuiTextfieldSize="s"
+        class="search__field"
+        formControlName="search"
+      >
+        {{ searchFieldText }}
+      </tui-input>
+      <button
+        tuiButton
+        [icon]="searchIcon"
+        type="submit"
+        appearance="primary-orange"
+        class="search-btn tui-space_left-3"
+        size="s"
+        [disabled]="isSearchDisabled"
+      >
+        <span class="search-btn__title">Search</span>
+      </button>
+      <ng-template #searchIcon>
+        <tui-svg src="tuiIconSearch"></tui-svg>
+      </ng-template>
+      <button
+        tuiButton
+        [icon]="deepSearchIcon"
+        type="button"
+        appearance="outline-orange"
+        class="search-btn tui-space_left-1"
+        size="s"
+        [disabled]="isSearchDisabled"
+        (click)="handleDeepSearch()"
+      >
+        <span class="search-btn__title">Deep search</span>
+      </button>
+      <ng-template #deepSearchIcon>
+        <img
+          style="margin-top: 0.3rem"
+          src="../../../assets/icons/deep-search.svg"
+        />
+      </ng-template>
+
+      <!-- <button
+        #button
+        tuiIconButton
+        type="button"
+        title="Menu"
+        size="s"
+        class="search-btn tui-space_left-1"
+        [iconRight]="searchTypeDropdownIcon"
+        [tuiDropdownContent]="searchTypeDropdownContent"
+        [tuiDropdown]="isSearchTypeDropdownActive"
+        (click)="toggleSearchTypeDropdown()"
+      ></button>
+      <ng-template #searchTypeDropdownIcon>
+        <tui-svg
+          src="tuiIconChevronDown"
+          class="icon"
+          [class.icon_rotated]="isSearchTypeDropdownActive"
+        ></tui-svg>
+      </ng-template>
+      <ng-template #searchTypeDropdownContent>
+        <ul class="dropdown">
+          <li class="dropdown__item" (click)="onChangeSearchType('default')">
+            Search
+          </li>
+          <li class="dropdown__item" (click)="onChangeSearchType('deep')">
+            Deep search
+          </li>
+        </ul>
+      </ng-template> -->
+    </form>
+    <!-- /.search header__search -->
+    <div class="user">
+      <div class="user__avatar tui-text_h6">{{ shortUserName }}</div>
+      <!-- /.user__avatar -->
+      <!-- (click)="toggleDropdown()" -->
+      <button
+        #button
+        [tuiDropdownContent]="dropdownContent"
+        [tuiDropdown]="isDropdownActive"
+        class="user__drop-button"
+      >
+        <tui-svg class="menu-btn__icon" src="tuiIconChevronDown"></tui-svg>
+      </button>
+    </div>
+    <!-- /.user -->
+    <ng-template #dropdownContent>
+      <ul class="dropdown">
+        <li class="dropdown__item dropdown__item--disabled">
+          {{ userName }}
+        </li>
+        <li class="dropdown__item" (click)="logOut()">
+          <tui-svg class="dropdown__icon" src="tuiIconLogoutLarge"></tui-svg>
+          Sign Out
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+  <!-- /.container header__container -->
+</div>
+<!-- /.header -->

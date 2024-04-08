@@ -1,0 +1,52 @@
+<div class="lecture-info">
+  <button class="lecture-info__close-btn">
+    <tui-svg
+      (click)="closeModal()"
+      class="lecture-info__close-btn-icon"
+      src="tuiIconCloseLarge"
+    ></tui-svg>
+  </button>
+  <p class="tui-space_top-2 tui-space_bottom-1">
+    <strong>Category</strong>:
+    {{ data.category?.length ? data.category[0] : "" }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Description</strong>:
+    {{ data.description }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Main language</strong>: {{ data.language?.main }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Translations</strong>: {{ data.language?.translations?.join(", ") }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Lecture code</strong>: {{ data.legacyData?.lectureCode }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>WP ID</strong>: {{ data.legacyData?.wpId }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Country</strong>: {{ data.location?.country }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Place</strong>: {{ data.place.length ? data.place[0] : "" }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Verse</strong>: {{ data.legacyData?.verse }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Tags</strong>: {{ data.tags?.join(", ") }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Advanced search</strong>: {{ data.search?.advanced }}
+  </p>
+  <p class="tui-space_bottom-1">
+    <strong>Simple search</strong>: {{ data.search?.simple }}
+  </p>
+  <p>
+    <strong>Length Type</strong>:
+    {{ data.lengthType?.length ? data.lengthType[0] : "" }}
+  </p>
+</div>
+<!-- /.lecture-info -->

@@ -1,0 +1,40 @@
+.dashboard {
+  &__wrapper {
+    &::ng-deep {
+      > .content {
+        padding-bottom: 40px;
+      }
+    }
+  }
+}
+
+.select-mode-wrapper {
+  display: flex;
+}
+.lectures-length {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+::ng-deep {
+  .filter-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    color: white;
+    font-size: 10px;
+    background: var(--tui-support-08);
+    border-radius: 50%;
+    transform: translate(50%, 100%);
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+}

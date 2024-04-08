@@ -1,0 +1,181 @@
+<div class="player-wrap">
+  <video
+    #target
+    class="video-js player"
+    controls
+    muted
+    playsinline
+    preload="none"
+  ></video>
+</div>
+<div class="player__actions-bar">
+  <div class="player__player-btns">
+    <button
+      class="player__player-btn"
+      [ngSwitch]="repeatType"
+      (click)="changeRepeatFunc()"
+      tuiButton
+      appearance="flat"
+      size="s"
+    >
+      <img
+        *ngSwitchCase="0"
+        src="../../../assets/img/icons/repeat.svg"
+        alt=""
+      />
+      <img
+        *ngSwitchCase="1"
+        src="../../../assets/img/icons/repeat-once.svg"
+        alt=""
+      />
+      <img
+        *ngSwitchCase="2"
+        src="../../../assets/img/icons/repeat-always.svg"
+        alt=""
+      />
+    </button>
+    <button
+      (click)="playPrevLecture()"
+      [disabled]="isPrevBtnDisabled"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="player__player-btn"
+    >
+      <img src="../../../assets/img/icons/prev.svg" alt="" />
+    </button>
+    <button
+      (click)="goBackward()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="player__player-btn"
+    >
+      <img
+        src="../../../assets/img/icons/backward.svg"
+        title="10 seconds backward"
+        alt=""
+      />
+    </button>
+    <button
+      (click)="goForward()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="player__player-btn"
+    >
+      <img
+        src="../../../assets/img/icons/forward.svg"
+        title="10 seconds forward"
+        alt=""
+      />
+    </button>
+    <button
+      (click)="playNextLecture()"
+      [disabled]="isNextBtnDisabled"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="player__player-btn"
+    >
+      <img src="../../../assets/img/icons/next.svg" alt="" />
+    </button>
+  </div>
+  <div class="player__lecture-btns">
+    <button
+      (click)="addToPlaylist()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="action-btn"
+    >
+      <svg class="action-btn__icon">
+        <use
+          xlink:href="../../../assets/img/icons/lecture-page-icons.svg#addToPL"
+        ></use>
+      </svg>
+      Add To Playlist
+    </button>
+    <button
+      (click)="toggleFavorite()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="action-btn"
+    >
+      <svg *ngIf="isLectureFavorite; else likeHollow" class="action-btn__icon">
+        <use
+          xlink:href="../../../assets/img/icons/lecture-page-icons.svg#like-filled"
+        ></use>
+      </svg>
+      <ng-template #likeHollow>
+        <svg class="action-btn__icon">
+          <use
+            xlink:href="../../../assets/img/icons/lecture-page-icons.svg#like"
+          ></use>
+        </svg>
+      </ng-template>
+      Add To Favorites
+    </button>
+    <button
+      (click)="downloadLecture()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="action-btn"
+    >
+      <svg class="action-btn__icon">
+        <use
+          xlink:href="../../../assets/img/icons/lecture-page-icons.svg#download"
+        ></use>
+      </svg>
+      Download
+    </button>
+    <button
+      (click)="toggleComplete()"
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="action-btn"
+      *ngIf="lectureProgressData?.isCompleted; else reset"
+    >
+      <svg class="action-btn__icon">
+        <use
+          xlink:href="../../../assets/img/icons/lecture-page-icons.svg#reset"
+        ></use>
+      </svg>
+      Reset completion
+    </button>
+    <ng-template #reset>
+      <button
+        tuiButton
+        appearance="flat"
+        size="s"
+        class="action-btn"
+        class="action-btn"
+        (click)="toggleComplete()"
+      >
+        <svg class="action-btn__icon">
+          <use
+            xlink:href="../../../assets/img/icons/lecture-page-icons.svg#complete"
+          ></use>
+        </svg>
+        Mark as complete
+      </button>
+    </ng-template>
+    <button
+      tuiButton
+      appearance="flat"
+      size="s"
+      class="action-btn"
+      (click)="shareLink()"
+    >
+      <svg class="action-btn__icon">
+        <use
+          xlink:href="../../../assets/img/icons/lecture-page-icons.svg#share"
+        ></use>
+      </svg>
+      Share
+    </button>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="statistics-period">
+  <div class="statistcs-period__title">
+    <h3>{{ title }}</h3>
+  </div>
+  <div class="statistics-period__content">
+    <div class="statistics-period__content-head">
+      <div class="statistics-item">
+        <span class="statistics-item__audio">
+          <img src="../../../assets/icons/IconAudio.svg" alt="" />
+          <span>Audio</span>
+        </span>
+        <span>
+          <b>{{ InfoListened?.audio | time: true }}</b> h
+        </span>
+      </div>
+    </div>
+    <div class="statistics-period__content-body">
+      <div class="statistics-item">
+        <span>Srimad Bhagavatam</span>
+        <span>
+          <b>{{ InfoListened?.SB | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Bhagavad-gita</span>
+        <span>
+          <b>{{ InfoListened?.BG | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Caitanya-caritamrta</span>
+        <span>
+          <b>{{ InfoListened?.CC | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Visnu-sahasranama</span>
+        <span>
+          <b>{{ InfoListened?.VSN | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Seminars</span>
+        <span>
+          <b>{{ InfoListened?.Seminars | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Bhajans</span>
+        <span>
+          <b>{{ InfoListened?.others | time: true }}</b> h
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

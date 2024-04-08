@@ -1,0 +1,78 @@
+@import "~videojs-playlist-ui/dist/videojs-playlist-ui.css";
+@import "~videojs-playlist-ui/dist/videojs-playlist-ui.vertical.css";
+
+.player-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 450px;
+  background: #1d1b18;
+}
+
+.player {
+  max-width: calc(100vw - 24px * 2 - 16px - 206px);
+  min-height: 100%;
+
+  &__actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    @media (max-width: 1200px) {
+      display: block;
+    }
+  }
+
+  &__player-btn {
+    width: 24px;
+    height: 22px;
+    margin-right: 5px;
+  }
+
+  &__player-btns {
+    display: flex;
+
+    button {
+      padding: 0;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__lecture-btns {
+    display: flex;
+    align-items: center;
+    color: #343a40;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    @media (max-width: 1200px) {
+      margin-top: 25px;
+    }
+  }
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &__icon {
+    max-width: 15px;
+    max-height: 15px;
+    margin-right: 5px;
+  }
+}
+
+.video-js .vjs-control-bar {
+  background: #1a2026;
+}
+
+.video-js .vjs-current-time,
+.vjs-no-flex .vjs-current-time {
+  display: block;
+}

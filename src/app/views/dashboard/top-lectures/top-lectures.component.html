@@ -1,0 +1,191 @@
+<div class="dashboard-head">
+  <h2 class="dashboard-head__title tui-text_h4">Popular</h2>
+  <form [formGroup]="form" class="dashboard-head__filters-wrapper">
+    <div class="select-mode-wrapper" *ngIf="isSelectMode; else filters">
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#addPlaylist"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="addSelectedToPlaylist()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Add to Playlist
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#heart"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="addSelectedToFavorites()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Add to Favorites
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#download"
+          appearance="flat"
+          type="button"
+          size="s"
+          [disabled]="selectedLecturesLength === 0"
+          (click)="downloadLectures()"
+        >
+          Download
+        </button>
+      </div>
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#checkbox"
+          appearance="flat"
+          type="button"
+          size="s"
+          (click)="markSelectedAsCompleted()"
+          [disabled]="selectedLecturesLength === 0"
+        >
+          Mark as Complete
+        </button>
+      </div>
+
+      <div class="select-wrapper tui-space_right-6">
+        <button
+          (click)="selectAll()"
+          tuiButton
+          appearance="outline"
+          type="button"
+          size="s"
+        >
+          Select All
+        </button>
+      </div>
+    </div>
+    <ng-template #filters>
+      <div class="select-wrapper tui-space_right-6">
+        <h5 class="select-wrapper__text">Period</h5>
+        <tui-select
+          class="select-wrapper__select"
+          tuiTextfieldSize="s"
+          [(ngModel)]="periodRequest"
+          formControlName="period"
+        >
+          All-time
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="['All-time', 'This month', 'This week', 'Today']"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <!-- /.select-wrapper -->
+      <div class="select-wrapper tui-space_right-6">
+        <h5 class="select-wrapper__text">Playback Mode</h5>
+        <tui-select
+          class="select-wrapper__select"
+          tuiTextfieldSize="s"
+          [(ngModel)]="showRequest"
+          formControlName="show"
+        >
+          Audio only (all lectures)
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="['Audio only (all lectures)', 'Only lectures with video']"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <!-- /.select-wrapper -->
+      <div class="select-wrapper tui-space_right-6">
+        <h5 class="select-wrapper__text">Sort by</h5>
+        <tui-select
+          class="select-wrapper__select"
+          tuiTextfieldSize="s"
+          [(ngModel)]="sortRequest"
+          formControlName="sort"
+        >
+          Default View View
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="[
+              'Default View',
+              'Duration (low to high)',
+              'Duration (high to low)',
+              'Rec date (oldest first)',
+              'Rec date (latest first)',
+              'Alphabetically (A-Z)',
+              'Alphabetically (Z-A)'
+            ]"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <!-- /.select-wrapper -->
+      <div class="select-wrapper tui-space_right-6">
+        <div class="filter-badge" *ngIf="activeFiltersCount">
+          {{ activeFiltersCount }}
+        </div>
+        <button
+          (click)="showDialog()"
+          tuiButton
+          icon="./../../../assets/img/sprite.svg#filter"
+          appearance="outline"
+          type="button"
+          size="s"
+        >
+          Filters
+        </button>
+      </div>
+    </ng-template>
+    <div class="select-wrapper select-mode-btn">
+      <h5
+        class="select-wrapper__text lectures-length"
+        *ngIf="selectedLecturesLength > 0"
+      >
+        Selected: {{ selectedLecturesLength }}
+      </h5>
+      <button
+        (click)="toggleSelectMode()"
+        tuiButton
+        [appearance]="isSelectMode ? 'secondary' : 'outline'"
+        type="button"
+        size="s"
+      >
+        {{ isSelectMode ? "Cancel" : "Select Multiple Files" }}
+      </button>
+    </div>
+    <!-- /.select-wrapper -->
+  </form>
+  <!-- /.dashboard-head__filters-wrapper -->
+</div>
+<!-- /.dashboard-head -->
+<tui-scrollbar class="dashboard__wrapper top-lectures" appPagination>
+  <div class="lectures-wrapper" *ngIf="isSortRequests()">
+    <app-lecture-post
+      [lectureData]="lecture"
+      (onLectureClick)="interractWithLecture(lecture, topLectures, i)"
+      *ngFor="let lecture of topLectures; index as i"
+      [lectureData]="lecture"
+      (onClick)="playLecture($event, topLectures)"
+    ></app-lecture-post>
+  </div>
+
+  <ng-template [ngIf]="popularLecturesIsReady">
+    <tui-loader
+      [showLoader]="contentLoader"
+      [overlay]="true"
+      size="xxl"
+      [inheritColor]="true"
+      class="content-loader"
+    >
+    </tui-loader>
+  </ng-template>
+
+  <app-lectures
+    [allLectures]="topLectures"
+    *ngIf="!isSortRequests()"
+  ></app-lectures>
+</tui-scrollbar>

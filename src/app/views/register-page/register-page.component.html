@@ -1,0 +1,84 @@
+<div class="register container">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="signUp(email.value, password.value)"
+    class="form login__form tui-col_4"
+  >
+    <button routerLink="/login" class="back">
+      <tui-svg class="back__icon" src="tuiIconArrowLeftLarge"></tui-svg>
+      <span>Back</span>
+    </button>
+    <!-- /.back -->
+    <h3 class="form__title tui-text_h4 tui-space_bottom-6">
+      Create an account
+    </h3>
+    <tui-input
+      tuiTextfieldExampleText="Enter your first name"
+      formControlName="name"
+      class="form__input tui-space_bottom-4"
+      tuiTextfieldSize="m"
+    >
+      First name
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Enter your surname"
+      class="form__input tui-space_bottom-4"
+      formControlName="surname"
+      tuiTextfieldSize="m"
+    >
+      Surname
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Enter your email"
+      class="form__input tui-space_bottom-4"
+      formControlName="email"
+      tuiTextfieldType="email"
+      tuiHintContent="Email"
+      tuiTextfieldSize="m"
+      #email
+    >
+      E-mail
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Enter your password"
+      class="form__input tui-space_bottom-4"
+      tuiTextfieldType="password"
+      tuiHintContent="Password"
+      formControlName="password"
+      tuiTextfieldSize="m"
+    >
+      Password
+    </tui-input>
+    <tui-input
+      tuiTextfieldExampleText="Repeat your password"
+      formControlName="passwordConfirm"
+      tuiTextfieldType="password"
+      tuiHintContent="Password"
+      class="form__input tui-space_bottom-4"
+      tuiTextfieldSize="m"
+      #password
+    >
+      Confirm password
+    </tui-input>
+    <button
+      tuiButton
+      [disabled]="form.invalid"
+      type="submit"
+      size="m"
+      class="tui-col_12 tui-space_bottom-3 tui-space_top-3 form__button"
+      appearance="primary-orange"
+    >
+      Sign Up
+    </button>
+    <p class="register__other tui-text_body-xs">
+      By clicking Sign Up, you agree to our
+      <a href="https://bvks.com/privacy-policy-2/" target="blank">Private Data Policy</a>
+      and
+      <a target="blank" href="https://bvks-d1ac.kxcdn.com/wp-content/uploads/2021/12/02220746/Cookie-Policy.pdf">
+        Cookie Policy </a
+      >.
+    </p>
+  </form>
+  <!-- /.form login__form -->
+</div>
+<!-- /.register -->

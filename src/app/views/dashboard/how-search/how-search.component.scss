@@ -1,0 +1,21 @@
+.how-to-search {
+  &__content {
+    padding-right: 30vw;
+    padding-bottom: 12vh;
+    p {
+      a {
+        display: block;
+        margin: 0.2rem 1rem;
+        padding: 0.2rem 1rem;
+        color: black;
+        font-style: italic;
+        text-decoration: none;
+
+        border-radius: 15px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

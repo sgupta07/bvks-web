@@ -1,0 +1,84 @@
+<main class="container adminEdits">
+  <section class="adminEdits__head">
+    <div>
+      <h2 class="tui-text_h4">Suggested edits</h2>
+      <div class="search">
+        <tui-input
+          [(ngModel)]="search"
+          tuiTextfieldExampleText="Find edit by title or ID"
+          (ngModelChange)="onSearchEditChange(search)"
+          (focusedChange)="onSearchFocusChange($event)"
+          [tuiTextfieldCleaner]="true"
+          tuiTextfieldSize="s"
+          class="search__field"
+        >
+          {{ searchFieldText }}
+        </tui-input>
+        <button
+          tuiButton
+          [icon]="searchIcon"
+          type="button"
+          (click)="searchEdits(search)"
+          appearance="primary-orange"
+          class="search-btn tui-space_left-3"
+          size="s"
+        >
+          <span class="search-btn__title">Search</span>
+        </button>
+      </div>
+
+      <div *ngIf="showDropdown" class="search-content">
+        <div class="search-dropdown" *ngIf="filteredLectures.length">
+          <div *ngFor="let lecture of filteredLectures">
+            <div
+              class="search-dropdown-lecture"
+              (click)="onDropdownLectureClick(lecture.id)"
+            >
+              {{ lecture.title.join(" ") }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #searchIcon>
+        <tui-svg src="tuiIconSearch"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="adminEdits__ticketTabs">
+      <button
+        tuiButton
+        [appearance]="selectedTab === 'open' ? 'primary' : 'outline'"
+        type="button"
+        size="s"
+        (click)="setSelectedTab('open')"
+      >
+        Open Tickets
+      </button>
+      <button
+        tuiButton
+        [appearance]="selectedTab === 'closed' ? 'primary' : 'outline'"
+        type="button"
+        size="s"
+        (click)="setSelectedTab('closed')"
+      >
+        Closed Tickets
+      </button>
+    </div>
+  </section>
+
+  <section class="adminEdits__body">
+    <div *ngIf="!isLoading && tickets.length === 0">No tickets found</div>
+
+    <app-edit-ticket-item
+      *ngFor="let ticket of tickets"
+      [ticket]="ticket"
+    ></app-edit-ticket-item>
+
+    <div *ngIf="isLoading">Loading...</div>
+
+    <div
+      observeVisibility
+      (visible)="loadMore()"
+      style="width: 100%; height: 8px"
+    ></div>
+  </section>
+</main>

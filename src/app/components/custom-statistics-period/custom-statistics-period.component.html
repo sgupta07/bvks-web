@@ -1,0 +1,79 @@
+<div class="statistics-period custom">
+  <div class="statistcs-period__title customTitle">
+    <h3>Custom</h3>
+    <label>
+      <tui-checkbox
+        #inputEl
+        class="tui-space_bottom-3"
+        size="l"
+        checked="allTime"
+        [(ngModel)]="allTime"
+        (ngModelChange)="onChange($event)"
+      >
+      </tui-checkbox>
+      <span> All time </span>
+    </label>
+  </div>
+  <div class="statistics-period__content">
+    <form class="b-form" [formGroup]="dateForm" *ngIf="!allTime">
+      <tui-input-date-range
+        tuiUnfinishedValidator="Finish filling the field"
+        formControlName="dateValue"
+        [min]="min"
+        [max]="max"
+        (focusedChange)="onFocusedChange($event)"
+      >
+        Choose dates
+      </tui-input-date-range>
+    </form>
+    <div class="statistics-period__content-head">
+      <div class="statistics-item">
+        <span class="statistics-item__audio">
+          <img src="../../../assets/icons/IconAudio.svg" alt="" />
+          <span>Audio</span>
+        </span>
+        <span>
+          <b>{{ InfoListened?.audio | time: true }}</b> h
+        </span>
+      </div>
+    </div>
+    <div class="statistics-period__content-body">
+      <div class="statistics-item">
+        <span>Srimad Bhagavatam</span>
+        <span>
+          <b>{{ InfoListened?.SB | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Bhagavad-gita</span>
+        <span>
+          <b>{{ InfoListened?.BG | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Caitanya-caritamrta</span>
+        <span>
+          <b>{{ InfoListened?.CC | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Visnu-sahasranama</span>
+        <span>
+          <b>{{ InfoListened?.VSN | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Seminars</span>
+        <span>
+          <b>{{ InfoListened?.Seminars | time: true }}</b> h
+        </span>
+      </div>
+      <div class="statistics-item">
+        <span>Bhajans</span>
+        <span>
+          <b>{{ InfoListened?.others | time: true }}</b> h
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

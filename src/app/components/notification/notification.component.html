@@ -1,0 +1,23 @@
+<div class="notification" [ngClass]="{ 'show-notification': showPanel }">
+  <tui-notification [hasIcon]="true" status="success">
+    <div class="notification__logo"></div>
+    <div class="notification__content">
+      <h4 class="notification__title">{{ notification?.title }}</h4>
+      <div class="notification__body">
+        <span>Date of recording: </span>
+        {{ notification?.date }}
+      </div>
+      <div class="notification__body">
+        <span>Category: </span>
+        {{ notification?.category }}
+      </div>
+      <div class="notification__body" *ngIf="!!notification?.verse.length">
+        <span>Verse: </span>
+        {{ notification?.verse }}
+      </div>
+    </div>
+    <div class="notification__close" (click)="dismissNotification()">
+      <span>&#10006;</span>
+    </div>
+  </tui-notification>
+</div>

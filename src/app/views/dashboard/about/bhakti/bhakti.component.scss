@@ -1,0 +1,11 @@
+.about-photos {
+  &__photo {
+    width: calc(100% / 5 - 20px);
+  }
+}
+
+.about__text-group {
+  &:first-of-type {
+    margin-top: 40px;
+  }
+}

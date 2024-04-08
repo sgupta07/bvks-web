@@ -1,0 +1,83 @@
+<main class="container adminEdits">
+  <section>
+    <h2 class="tui-text_h4 adminEdits__head">Create/Update transcription</h2>
+    <form (ngSubmit)="onSearch()" [formGroup]="form" class="search__wrapper">
+      <tui-input
+        formControlName="search"
+        onSearchTranscriptionChange
+        (ngModelChange)="onSearchTranscriptionChange()"
+        tuiTextfieldExampleText="Type your search request"
+        [tuiTextfieldCleaner]="true"
+        tuiTextfieldSize="s"
+        class="search__input"
+        [disabled]="isDisabledSearch"
+        (focusedChange)="onSearchFocusChange($event)"
+        >{{ searchFieldText }}
+      </tui-input>
+      <button
+        tuiButton
+        [icon]="searchIcon"
+        type="submit"
+        appearance="primary-orange"
+        class="search-btn tui-space_left-3"
+        size="s"
+      >
+        <span class="search-btn__title">Search</span>
+      </button>
+      <ng-template #searchIcon>
+        <tui-svg src="tuiIconSearch"></tui-svg>
+      </ng-template>
+    </form>
+    <div *ngIf="searchError" class="search-error">{{ searchError }}</div>
+  </section>
+  <div *ngIf="showDropdown" class="search-content">
+    <div class="search-dropdown" *ngIf="filteredLectures.length">
+      <div *ngFor="let lecture of filteredLectures">
+        <div
+          class="search-dropdown-lecture"
+          (click)="onDropdownLectureClick(lecture.id)"
+        >
+          {{ lecture.title.join(" ") }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="transcription-wrapper">
+    <h2 class="title tui-text_h4">{{ title }}</h2>
+    <tui-text-area
+      [(ngModel)]="transcription"
+      class="transcription"
+      [tuiTextfieldCleaner]="true"
+      (ngModelChange)="onTranscriptionChange(transcription)"
+    ></tui-text-area>
+    <p>
+      To create or change lecture transcription try to search it by id or title
+    </p>
+  </div>
+  <div class="transcription-options">
+    <button
+      *ngIf="!isCreateMode && currentTranscriptionId"
+      tuiButton
+      (click)="changeTranscription(currentTranscriptionId)"
+      appearance="primary-orange"
+      class="search-btn tui-space_left-3"
+      size="s"
+    >
+      <span class="search-btn__title"
+        >Change transcription for id: {{ currentTranscriptionId }}</span
+      >
+    </button>
+    <button
+      *ngIf="isCreateMode && currentTranscriptionId"
+      tuiButton
+      (click)="createTranscription(currentTranscriptionId)"
+      appearance="primary-orange"
+      class="search-btn tui-space_left-3"
+      size="s"
+    >
+      <span class="search-btn__title"
+        >Create transcription for id: {{ currentTranscriptionId }}</span
+      >
+    </button>
+  </div>
+</main>

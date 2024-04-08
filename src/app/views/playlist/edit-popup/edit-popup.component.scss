@@ -1,0 +1,18 @@
+.playlist-dialog {
+  &-btn {
+    text-align: right;
+  }
+  &__select {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+}
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}

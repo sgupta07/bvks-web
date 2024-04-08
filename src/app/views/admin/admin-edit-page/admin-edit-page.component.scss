@@ -1,0 +1,148 @@
+:host {
+  display: block;
+}
+
+.editPage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  margin-top: 16px;
+  padding-bottom: 16px;
+  column-gap: 24px;
+}
+
+.editMain {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & tui-pagination {
+      &::ng-deep {
+        & tui-wrapper[data-appearance="flat"] {
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+
+  &__body {
+    position: relative;
+    height: 32rem;
+    margin-top: 16px;
+    padding: 8px 16px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+
+    & > p {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 32px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: start;
+    margin-top: 16px;
+  }
+}
+
+.editInfoItem {
+  padding: 4px 8px;
+  border: 1px solid #fd7e14;
+  border-radius: 8px;
+
+  & > h3 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  & > p {
+    color: #343a40;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.editSide {
+  position: sticky;
+  top: 0;
+
+  &__wrapper {
+    display: grid;
+    grid-template-rows: auto;
+    margin-top: 16px;
+    padding: 8px;
+    padding-bottom: 24px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    row-gap: 10px;
+  }
+}
+
+.suggestedItem {
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+
+  &_active {
+    border-color: #fd7e14;
+  }
+
+  & > p {
+    max-width: 280px;
+    overflow: hidden;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.editPopover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 582px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #fd7e14;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+  & > p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 16px;
+
+    & > button {
+      flex-grow: 1;
+    }
+  }
+}
+
+.transcription {
+  white-space: pre-wrap;
+}

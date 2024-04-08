@@ -1,0 +1,7 @@
+.playlists-wrapper {
+  display: grid;
+  grid-row-gap: 25px;
+  grid-column-gap: 23px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding-right: 30px;
+}

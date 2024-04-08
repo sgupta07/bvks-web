@@ -1,0 +1,17 @@
+<tui-root>
+  <app-progress-bar class="progress-bar"></app-progress-bar>
+  <main class="app">
+    <!-- <app-vjs-player [options]="playerOptions"></app-vjs-player>
+  <article *ngFor="let user of playLists | async; index as i">
+    <h2>PlayList {{ i + 1 }} Data</h2>
+    <code>
+      {{ user | json }}
+    </code>
+    <hr />
+    <br />
+  </article> -->
+    <router-outlet></router-outlet>
+    <app-audioplayer></app-audioplayer>
+  </main>
+  <app-notification></app-notification>
+</tui-root>
