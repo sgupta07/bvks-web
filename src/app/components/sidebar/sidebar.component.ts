@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { TuiSvgService } from "@taiga-ui/core";
 import { DashboardService } from "./../../services/dashboard.service";
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 
 import { ISidebarLink } from "./../../models/sidebar-link";
 
@@ -17,11 +19,6 @@ export class SidebarComponent implements OnInit {
       link: "/dashboard/categories",
     },
     {
-      iconPath: "./../../../assets/img/sprite.svg#book",
-      text: "Search by text",
-      link: "/dashboard/text",
-    },
-    {
       iconPath: "tuiIconStarLarge",
       text: "Popular",
       link: "/dashboard/top",
@@ -36,9 +33,6 @@ export class SidebarComponent implements OnInit {
       text: "Favorites",
       link: "/dashboard/favorites",
     },
-  ];
-
-  sidebarLinksGroup2: ISidebarLink[] = [
     {
       iconPath: "./../../../assets/img/sprite.svg#history",
       text: "History",
@@ -53,6 +47,14 @@ export class SidebarComponent implements OnInit {
       iconPath: "tuiIconDownloadLarge",
       text: "Downloads",
       link: "/dashboard/downloads",
+    },
+  ];
+
+  sidebarLinksGroup2: ISidebarLink[] = [
+    {
+      iconPath: "./../../../assets/img/sprite.svg#book2",
+      text: "Knowledge Base",
+      link: "/dashboard/text",
     },
     {
       iconPath: "./../../../assets/img/sprite.svg#about",
@@ -71,6 +73,8 @@ export class SidebarComponent implements OnInit {
     },
   ];
 
+  isSubMenuActive: boolean = false;
+
   get isMenuActive(): boolean {
     return this._dashboardService.isMenuActive;
   }
@@ -81,4 +85,8 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  toggleSubMenu(): void {
+    this.isSubMenuActive = !this.isSubMenuActive;
+  }
 }

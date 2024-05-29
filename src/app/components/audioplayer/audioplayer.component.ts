@@ -354,7 +354,7 @@ export class AudioplayerComponent implements OnInit {
   }
 
   downloadLecture() {
-    this._downloadService.donwloadSingleLecture(this.lectureData);
+    this._downloadService.downloadSingleLecture(this.lectureData);
   }
 
   addToPlaylist() {

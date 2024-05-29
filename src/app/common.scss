@@ -253,6 +253,18 @@ button[data-appearance="flat"] {
       display: flex;
     }
   }
+
+  &-text {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 83px;
+    padding: 15px 23px 16px 23px;
+    &__filters-wrapper {
+      display: flex;
+    }
+  }
 }
 
 .select-wrapper {

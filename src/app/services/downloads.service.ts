@@ -52,7 +52,7 @@ export class DownloadsService extends BaseRequestService {
     }
   }
 
-  async donwloadSingleLecture(lectureData: ILecture) {
+  async downloadSingleLecture(lectureData: ILecture) {
     if (this.isActiveDownloads) {
       return;
     }
@@ -75,7 +75,8 @@ export class DownloadsService extends BaseRequestService {
     );
 
     this.http.request(audioData).subscribe(event => {
-      if (event.type === HttpEventType.DownloadProgress) {
+
+       if (event.type === HttpEventType.DownloadProgress) {
         this.isActiveDownloads = true;
         // download progress event. Compute and show the % done:
         const percentDone = Math.round((100 * event.loaded) / event.total);

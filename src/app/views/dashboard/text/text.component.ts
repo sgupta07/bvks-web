@@ -7,6 +7,7 @@ import { FilterComponent } from "src/app/components/filter/filter.component";
 import { DeepSearchService } from "src/app/services/deep-search.service";
 import { FilterService } from "src/app/services/filter.service";
 import { GlobalStateService } from "src/app/services/global-state.service";
+import { HowSearchComponent } from "../how-search/how-search.component";
 import { LecturesService } from "src/app/services/lectures.service";
 import { MultiSelectService } from "src/app/services/multi-select.service";
 import { SearchService } from "src/app/services/search.service";
@@ -27,6 +28,7 @@ export class TextComponent implements OnInit {
   isLoading = false;
   isEmpty = false;
   showPopup = false;
+  showHowSearch = true;
   constructor(
     public _lecturesService: LecturesService,
     public _filterService: FilterService,
@@ -104,6 +106,7 @@ export class TextComponent implements OnInit {
   onSearchChange() {
     if (this.search.trim() !== "") return;
     this.textItems = [];
+    this.showHowSearch = true;
   }
   set sortRequest(value: string) {
     this._globalState.sortRequest = value;
@@ -132,6 +135,7 @@ export class TextComponent implements OnInit {
     this.isEmpty = false;
     this.searchError = "";
     this.isLoading = true;
+    this.showHowSearch = false; 
     this.searchString = this.search;
     this.pushSearchParamsToURL();
     this._deepSearchService.searchTranscriptions(this.searchString)?.subscribe(

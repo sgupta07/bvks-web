@@ -69,7 +69,7 @@
     </div>
     <ng-template #filters>
       <!-- /.select-wrapper -->
-      <div class="select-wrapper tui-space_right-6">
+      <!-- <div class="select-wrapper tui-space_right-6">
         <h5 class="select-wrapper__text">Sort by</h5>
         <tui-select
           class="select-wrapper__select"
@@ -91,13 +91,13 @@
             ]"
           ></tui-data-list-wrapper>
         </tui-select>
-      </div>
+      </div> -->
       <!-- /.select-wrapper -->
       <div class="select-wrapper tui-space_right-6">
         <div class="filter-badge" *ngIf="activeFiltersCount">
           {{ activeFiltersCount }}
         </div>
-        <button
+        <!-- <button
           (click)="showDialog()"
           tuiButton
           icon="./../../../assets/img/sprite.svg#filter"
@@ -106,7 +106,7 @@
           size="s"
         >
           Filters
-        </button>
+        </button> -->
       </div>
     </ng-template>
     <div class="select-wrapper select-mode-btn">
@@ -116,7 +116,7 @@
       >
         Selected: {{ selectedLecturesLength }}
       </h5>
-      <button
+      <!-- <button
         (click)="toggleSelectMode()"
         tuiButton
         [appearance]="isSelectMode ? 'secondary' : 'outline'"
@@ -124,7 +124,7 @@
         size="s"
       >
         {{ isSelectMode ? "Cancel" : "Select Multiple Files" }}
-      </button>
+      </button> -->
     </div>
     <!-- /.select-wrapper -->
   </form>
@@ -147,6 +147,7 @@
     >
       {{ searchFieldText }}
     </tui-input>
+ 
     <button
       tuiButton
       [icon]="searchIcon"
@@ -159,19 +160,13 @@
     </button>
     <!-- info popup -->
     <div class="info-popup">
-      <div
-        [routerLink]="['how']"
-        class="info-popup__info-icon"
-        title="Click to see more info about search capabilities"
-      >
-        ?
-      </div>
     </div>
 
     <ng-template #searchIcon>
       <tui-svg src="tuiIconSearch"></tui-svg>
     </ng-template>
   </form>
+  <app-how-search *ngIf="showHowSearch"></app-how-search>
   <div class="text-items-list">
     <div *ngIf="searchError">{{ searchError }}</div>
     <div *ngIf="isEmpty">No lectures was found.</div>

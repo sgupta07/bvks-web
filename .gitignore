@@ -47,3 +47,7 @@ Thumbs.db
 .firebaserc
 .firebase/hosting.ZGlzdFxwcm9qZWN0XGJyb3dzZXI.cache
 firebase.json
+
+
+#yarn
+yarn.lock

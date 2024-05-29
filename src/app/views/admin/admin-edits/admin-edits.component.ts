@@ -17,7 +17,7 @@ export class AdminEditsComponent implements OnInit {
   showDropdown = false;
   filteredLectures: ILecture[] = [];
   lectures: ILecture[] = [];
-  searchFieldText = `find edit by id`;
+  searchFieldText = `Enter title or ID`;
   search = "";
   readonly take = 30;
   selectedTab: "open" | "closed" = "open";

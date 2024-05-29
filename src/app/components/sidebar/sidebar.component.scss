@@ -5,6 +5,9 @@
       &__item-span {
         display: block;
       }
+      &__items-in-menu{
+        margin-left: 20px;
+      }
     }
   }
 }
@@ -81,5 +84,11 @@
   transition: 0.4s;
   span {
     min-width: 110px;
+  }
+}
+.sidebar-group:nth-of-type(2) {
+  .sidebar-group__item:first-child {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
   }
 }

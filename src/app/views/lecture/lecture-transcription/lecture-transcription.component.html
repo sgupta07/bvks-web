@@ -120,14 +120,6 @@
           </tui-input>
           <!-- info popup -->
           <div class="info-popup">
-            <div
-              class="info-popup__info-icon"
-              (mouseenter)="showPopup = true"
-              (mouseleave)="showPopup = false"
-            >
-              ?
-            </div>
-
             <div class="info-popup__popup" *ngIf="showPopup">
               <!-- Your popup content goes here -->
               <h4>Wildcards</h4>
@@ -247,7 +239,7 @@
       (click)="onModalClick($event)"
       #modal
     >
-      <h3 class="selection-modal__title">Edit</h3>
+      <h3 class="selection-modal__title">Enter the correct text</h3>
       <form
         [formGroup]="form"
         class="selection-modal__form"

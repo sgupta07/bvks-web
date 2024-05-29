@@ -59,6 +59,7 @@ export class AdminTranscriptionCreateComponent implements OnInit {
     this.currentTranscriptionId = id;
     const lectureData = await this._statisticService.getActuaLectureData(id);
     this.title = lectureData.title.join(" ");
+    this.transcription = '';
     this._transcriptionService.searchTranscriptionById(id).subscribe(
       data => {
         if (!data) {

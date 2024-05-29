@@ -1,16 +1,27 @@
-<div class="dashboard-head">
+<div class="dashboard-text">
   <h2 class="dashboard-head__title tui-text_h4">
-    How to search transcriptions
+    How to search:
   </h2>
 </div>
-<tui-scrollbar class="dashboard__wrapper how-to-search__wrapper">
+<tui-scrollbar class=" how-to-search__wrapper">
   <div class="col-12 col-md-7 how-to-search__content">
     <div class="block-paragraph">
-      <p>
-        <i
-          >Following are some examples of the different features of the
-          search:</i
-        >
+      <p class="main_text">Since most of the transcripts use regular 
+        English spellings and only a few contain diacritized versions of words, 
+        please start your search using the regular English spelling. 
+        If necessary, search again using the non-diacritized version to find additional results (if any)
+        for the same keywords. Note that you may not find any results with the diacritized version.
+      </p>
+      <p class="main_text">For example, if you are looking for information about Sankaracarya,
+        first search for 'Shankaracharya' to get the maximum number of
+        results. To find more results, you can then search with
+        'Sankaracarya,' although this may or may not yield additional
+        results. The same applies to other words like Canakya. Start by
+        searching for 'Chanakya' to get the most hits. Searching with
+        'Canakya' may or may not provide more results.
+      </p>
+      <p class="main_text">Here are examples of the different types of searches that our
+        system currently supports:
       </p>
       <h4>Phrases:</h4>
       <p>
@@ -21,8 +32,8 @@
       </p>
       <p>
         <a
-          href="https://vedabase.io/en/search/?query=%22Krsna+is+never+alone%22"
-          >"Krsna is never alone"</a
+          href="https://web.bvksdigital.com/dashboard/text?search=%22Krishna%20is%20never%20alone%22"
+          >"Krishna is never alone"</a
         >
       </p>
       <h4>Wildcards:</h4>
@@ -37,15 +48,15 @@
         with the single character replaced. For example, to search for "text" or
         "test" you can use the search:
       </p>
-      <p><a href="https://vedabase.io/en/search/?query=te%3Ft">te?t</a></p>
+      <p><a href="https://web.bvksdigital.com/dashboard/text?search=te%3Ft">te?t</a></p>
       <p>
         Multiple character wildcard searches looks for 0 or more characters. For
         example, to search for Hari, Harinama or Haridāsa, you can use the
         search:
       </p>
-      <p><a href="https://vedabase.io/en/search/?query=hari*">hari*</a></p>
+      <p><a href=" https://web.bvksdigital.com/dashboard/text?search=hari* ">hari*</a></p>
       <p>You can also use the wildcard searches in the middle of a term.</p>
-      <p><a href="https://vedabase.io/en/search/?query=pre*us">pre*us</a></p>
+      <p><a href="https://web.bvksdigital.com/dashboard/text?search=pre*us">pre*us</a></p>
       <p>
         Note: You cannot use a * or ? symbol as the first character of a search.
       </p>
@@ -58,8 +69,8 @@
       </p>
       <p>
         <a
-          href="https://vedabase.io/en/search/?query=%22paraphernalia+king%22~4"
-          >"paraphernalia king"~4</a
+          href="https://web.bvksdigital.com/dashboard/text?search=%22paraphernalia%20king%22~20"
+          >"paraphernalia king"~20</a
         >
       </p>
       <h4>Boolean:</h4>
@@ -81,12 +92,12 @@
         query:
       </p>
       <p>
-        <a href="https://vedabase.io/en/search/?query=krsna+cow">krsna cow</a>
+        <a href="https://web.bvksdigital.com/dashboard/text?search=farms%20cows">farms cows</a>
       </p>
       <p>or</p>
       <p>
-        <a href="https://vedabase.io/en/search/?query=krsna+OR+cow"
-          >krsna OR cow</a
+        <a href="https://web.bvksdigital.com/dashboard/text?search=farms%20OR%20cows"
+          >farms OR cows</a
         >
       </p>
       <h5>AND</h5>
@@ -101,8 +112,8 @@
       </p>
       <p>
         <a
-          href="https://vedabase.io/en/search/?query=%22practical+application%22+AND+%22control+of+the+mind%22"
-          >"practical application" AND "control of the mind"</a
+          href="https://web.bvksdigital.com/lecture/11241/transcription?search=%22varnashrama%20dharma%22%20AND%20%22cow%20protection%22"
+          >"varnashrama dharma" AND "cow protection"</a
         >
       </p>
       <h5>+ (plus)</h5>
@@ -115,8 +126,8 @@
         "devotion" use the query:
       </p>
       <p>
-        <a href="https://vedabase.io/en/search/?query=%2Bpure+devotion"
-          >+pure devotion</a
+        <a href="https://web.bvksdigital.com/dashboard/text?search=+cow%20calf"
+          >+cow calf</a
         >
       </p>
       <h5>NOT</h5>
@@ -131,7 +142,7 @@
       </p>
       <p>
         <a
-          href="https://vedabase.io/en/search/?query=%22pure+devotional+service%22+NOT+%22mixed+devotional+service%22"
+          href="https://web.bvksdigital.com/dashboard/text?search=%22pure%20devotional%20service%22%20NOT%20%22sense%20gratification%22"
           >"pure devotional service" NOT "mixed devotional service"</a
         >
       </p>
@@ -152,7 +163,7 @@
         its term. For example, if you are searching for
       </p>
       <p>
-        <a href="https://vedabase.io/en/search/?query=knowledge+education"
+        <a href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%20education"
           >knowledge&nbsp;education</a
         >
       </p>
@@ -161,7 +172,7 @@
         ^ symbol along with the boost factor next to the term. You would type:
       </p>
       <p>
-        <a href="https://vedabase.io/en/search/?query=knowledge%5E10+education"
+        <a href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%5E10%20education"
           >knowledge^10&nbsp;education</a
         >
       </p>
@@ -171,7 +182,7 @@
       </p>
       <p>
         <a
-          href="https://vedabase.io/en/search/?query=%22pure+devotion%22%5E4+%22mixed+devotional+service%22"
+          href="https://web.bvksdigital.com/dashboard/text?search=%22pure%20devotion%22%5E4%20%22mixed%20devotional%20service%22"
           >"pure devotion"^4 "mixed devotional service"</a
         >
       </p>

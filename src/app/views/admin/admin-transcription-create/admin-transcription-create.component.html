@@ -1,6 +1,6 @@
 <main class="container adminEdits">
   <section>
-    <h2 class="tui-text_h4 adminEdits__head">Create/Update transcription</h2>
+    <h2 class="tui-text_h4 adminEdits__head">Create/Update transcript</h2>
     <form (ngSubmit)="onSearch()" [formGroup]="form" class="search__wrapper">
       <tui-input
         formControlName="search"
@@ -64,7 +64,7 @@
       size="s"
     >
       <span class="search-btn__title"
-        >Change transcription for id: {{ currentTranscriptionId }}</span
+        >Update transcript for ID {{ currentTranscriptionId }}</span
       >
     </button>
     <button
@@ -76,7 +76,7 @@
       size="s"
     >
       <span class="search-btn__title"
-        >Create transcription for id: {{ currentTranscriptionId }}</span
+        >Create transcript for ID {{ currentTranscriptionId }}</span
       >
     </button>
   </div>

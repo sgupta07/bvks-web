@@ -297,6 +297,6 @@ export class LectureComponent implements OnInit, OnDestroy {
   }
 
   downloadLecture() {
-    this._downloadService.donwloadSingleLecture(this.lectureData);
+    this._downloadService.downloadSingleLecture(this.lectureData);
   }
 }

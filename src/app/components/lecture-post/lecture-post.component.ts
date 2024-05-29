@@ -143,7 +143,7 @@ export class LecturePostComponent implements OnInit, OnDestroy {
   }
 
   async downloadLecture() {
-    await this._downloadService.donwloadSingleLecture(this.lectureData);
+    await this._downloadService.downloadSingleLecture(this.lectureData);
 
     this._downloadService.onDownloadProgress.subscribe((event: number) => {
       this.downloadProgress = event;
