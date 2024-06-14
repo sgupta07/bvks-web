@@ -1,9 +1,9 @@
 export enum FilterCategories {
-  a = "languages",
-  b = "countries",
+  a = "language",
+  b = "country",
   c = "place",
-  d = "years",
+  d = "year",
   e = "month",
-  f = "categories",
+  f = "category",
   g = "translation",
 }

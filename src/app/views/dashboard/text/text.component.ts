@@ -118,6 +118,7 @@ export class TextComponent implements OnInit {
 
   async showDialog() {
     await this.dialog.toPromise();
+    this.searchText(); 
   }
   pushSearchParamsToURL() {
     let queryParams: Params = { search: this.searchString }; // Specify your search parameters here
@@ -138,7 +139,8 @@ export class TextComponent implements OnInit {
     this.showHowSearch = false; 
     this.searchString = this.search;
     this.pushSearchParamsToURL();
-    this._deepSearchService.searchTranscriptions(this.searchString)?.subscribe(
+    const filters = this._filterService.allActiveFilters;
+    this._deepSearchService.searchTranscriptions(this.searchString, filters).subscribe(
       data => {
         if (!data) {
           return;

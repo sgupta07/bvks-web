@@ -278,24 +278,24 @@ export class LecturesComponent implements OnInit {
     console.log("FILTERING LECTURES");
 
     const filterLecturesByLanguage = () => {
-      if (!this._filterService.allActiveFilters.languages.length) {
+      if (!this._filterService.allActiveFilters.language.length) {
         return lectures;
       }
 
       return lectures.filter(x =>
-        this._filterService.allActiveFilters.languages.includes(x.language.main)
+        this._filterService.allActiveFilters.language.includes(x.language.main)
       );
     };
 
     lectures = filterLecturesByLanguage();
 
     const filterLecturesByCountries = () => {
-      if (!this._filterService.allActiveFilters.countries.length) {
+      if (!this._filterService.allActiveFilters.country.length) {
         return lectures;
       }
 
       return lectures.filter(x =>
-        this._filterService.allActiveFilters.countries.includes(
+        this._filterService.allActiveFilters.country.includes(
           x.location.country
         )
       );
@@ -316,12 +316,12 @@ export class LecturesComponent implements OnInit {
     lectures = filterLecturesByPlace();
 
     const filterLecturesByYears = () => {
-      if (!this._filterService.allActiveFilters.years.length) {
+      if (!this._filterService.allActiveFilters.year.length) {
         return lectures;
       }
 
       return lectures.filter(x =>
-        this._filterService.allActiveFilters.years.includes(
+        this._filterService.allActiveFilters.year.includes(
           x.dateOfRecording.year
         )
       );
@@ -387,13 +387,13 @@ export class LecturesComponent implements OnInit {
     lectures = filterLecturesByMonth();
 
     const filterLecturesByCategories = () => {
-      if (!this._filterService.allActiveFilters.categories?.length) {
+      if (!this._filterService.allActiveFilters.category?.length) {
         return lectures;
       }
 
       return lectures.filter(x => {
         if (x.category?.length) {
-          return this._filterService.allActiveFilters.categories.includes(
+          return this._filterService.allActiveFilters.category.includes(
             x.category[0]
           );
         }

@@ -1,9 +1,9 @@
 export interface IFilter {
-  languages: string[];
-  countries: string[];
+  language: string[];
+  country: string[];
   place: string[];
-  years: string[];
+  year: string[];
   month: string[];
-  categories: string[];
+  category: string[];
   translation: string[];
 }

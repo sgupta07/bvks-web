@@ -4,7 +4,7 @@
     [routerLink]="['/lecture', data.id, 'transcription']"
     [queryParams]="{ search: search }"
   >
-    {{ title || data.id }}
+    {{data.title}}
   </h2>
   <div
     class="text-item__desc"

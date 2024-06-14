@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { ILecture } from "src/app/models/lecture";
 import { LecturesService } from "src/app/services/lectures.service";
 
 interface TextType {
   id: number;
+  title: string
   transcription: string[];
 }
 
@@ -19,14 +19,6 @@ export class SearchTextItemComponent implements OnInit {
   constructor(private _lecturesService: LecturesService) {}
 
   async ngOnInit() {
-    let lecture = this._lecturesService.allLectures.find(
-      (lecture: ILecture) => lecture.id === this.data.id
-    );
-    if (!lecture) {
-      lecture = (await this._lecturesService.getLectureByIdFromFirebase(
-        this.data.id
-      )) as any;
-    }
-    this.title = lecture.title.join(" ");
+   
   }
 }

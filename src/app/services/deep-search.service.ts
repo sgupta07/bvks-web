@@ -17,11 +17,29 @@ interface IDeepSearchItem {
   count: number;
 }
 
+export interface ISearchResponse {
+  data: ISearchItem[];
+}
+interface ISearchItem {
+  id: number;
+  transcription: string[]
+}
+
 enum SearchBooleanEnum {
   OR = "should",
   AND = "filter",
   NOT = "must_not",
 }
+
+interface LectureFilterDto {
+  language?: string[];
+  country?: string[];
+  year?: string[];
+  month?: string[]; 
+  place?: string[];
+  translation?: string[];
+  category?: string[];
+};
 
 @Injectable({
   providedIn: "root",
@@ -33,14 +51,64 @@ export class DeepSearchService {
     if (searchString.trim().length === 0) {
       return;
     }
+    const params = this.parsedSearchStringParams(searchString);
     return this.http.get<IDeepSearchResponse>(
       `${environment.elasticUrl}transcription/search/phrase`,
       {
-        params: { search: searchString },
+        params,
       }
     );
   }
-  searchTranscriptions(searchString: string) {
+
+  searchTranscriptions(searchString: string, filters?: LectureFilterDto) {
+    if (searchString.trim().length === 0) {
+      return;
+    }
+    const requestBody: any = { search: searchString };
+
+    const params = this.parsedSearchStringParams(searchString);
+    let endpoint
+    if (!params.default) {
+      const nonEmptyFilters: Partial<LectureFilterDto> = {};
+      if (filters) {
+        Object.keys(filters).forEach(key => {
+          if (filters[key as keyof LectureFilterDto] && filters[key as keyof LectureFilterDto]!.length > 0) {
+            nonEmptyFilters[key as keyof LectureFilterDto] = filters[key as keyof LectureFilterDto];
+          }
+        });
+      }
+      if (Object.keys(nonEmptyFilters).length > 0) {
+        requestBody.filters = nonEmptyFilters;
+      }
+  
+       endpoint = `${environment.elasticUrl}transcription/search/wildcard`
+
+    } else {
+      const nonEmptyFilters: Partial<LectureFilterDto> = {};
+      if (filters) {
+        Object.keys(filters).forEach(key => {
+          if (filters[key as keyof LectureFilterDto] && filters[key as keyof LectureFilterDto]!.length > 0) {
+            nonEmptyFilters[key as keyof LectureFilterDto] = filters[key as keyof LectureFilterDto];
+          }
+        });
+      }
+      if (Object.keys(nonEmptyFilters).length > 0) {
+        requestBody.filters = nonEmptyFilters;
+      }
+  
+       endpoint = `${environment.elasticUrl}transcription/search/phrase`;
+    }
+
+  
+   
+  
+    return this.http.post<ISearchResponse>(
+      endpoint,
+      requestBody
+    );
+  }
+
+  searchTranscriptionss(searchString: string) {
     if (searchString.trim().length === 0) {
       return;
     }
@@ -61,6 +129,11 @@ export class DeepSearchService {
       );
     }
   }
+  
+  
+  
+
+
   searchTranscriptionById(id: number) {
     return this.http.get<any>(`${environment.elasticUrl}transcription/${id}`);
   }

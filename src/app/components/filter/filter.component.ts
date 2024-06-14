@@ -19,20 +19,20 @@ export class FilterComponent implements OnInit {
   @Input() isVisible?: boolean;
 
   tabs: string[] = [
-    "Languages",
-    "Countries",
-    "Place",
-    "Years",
-    "Month",
-    "Categories",
-    "Translation",
+    "language",
+    "country",
+    "place",
+    "year",
+    "month",
+    "category",
+    "translation",
   ];
 
-  activeTab: string = "Languages";
+  activeTab: string = "language";
   activeVariants: string[];
   filterVariants: any = {
-    languages: ["English", "বাংলা", "हिन्दी"],
-    countries: [
+    language: ["English", "বাংলা", "हिन्दी"],
+    country: [
       "Bangladesh",
       "Canada",
       "Croatia",
@@ -158,7 +158,7 @@ export class FilterComponent implements OnInit {
       "Vellore, Tamil Nadu",
       "Vrindavana, Uttar Pradesh",
     ],
-    years: [
+    year: [
       "2024",
       "2023",
       "2022",
@@ -206,7 +206,7 @@ export class FilterComponent implements OnInit {
       "November",
       "December",
     ],
-    categories: [
+    category: [
       "ASK BVKS",
       "Assorted Lectures",
       "Bhagavad-gītā",
@@ -229,6 +229,16 @@ export class FilterComponent implements OnInit {
       "తెలుగు (Telugu)",
     ],
   };
+  selectedFilters: IFilter = {
+    language: [],
+    country: [],
+    place: [],
+    year: [],
+    month: [],
+    category: [],
+    translation: [],
+  };
+
 
   constructor(
     private _globalStateService: GlobalStateService,
@@ -271,5 +281,14 @@ export class FilterComponent implements OnInit {
     this._multiselectService.searchSelectTrigger(true);
     this._globalStateService.onFilterApply.emit();
     this._globalStateService.setSortRequest("Rec date (latest first)");
+  }
+
+  saveFilters() {
+    this.selectedFilters = this._filterService.getFilters();
+  }
+
+  loadFilters() {
+    this._filterService.setFilters(this.selectedFilters);
+    this.transferLocalFiltersToGlobal();
   }
 }

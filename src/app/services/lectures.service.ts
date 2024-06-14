@@ -100,10 +100,10 @@ export class LecturesService {
             .slice(0, 5);
         }
 
-        this.getPopularLectures();
-        this.getLatestLecturesInEnglish();
-        this.getLatestLecturesInBengalian();
-        this.getLatestLecturesInHindi();
+         this.getPopularLectures();
+         this.getLatestLecturesInEnglish();
+         this.getLatestLecturesInBengalian();
+         this.getLatestLecturesInHindi();
 
         const lectures = await this._firestore
           .collection<ILecture>("lectures", ref => {
@@ -125,7 +125,7 @@ export class LecturesService {
         this._globalState.onCategoryLecturesLoaded.emit();
       }
       this.user = this._authService.getUser();
-      this.localLecturesCount = await this.getAllLecturesLengthFromFirebase();
+      //this.localLecturesCount = await this.getAllLecturesLengthFromFirebase();
       this.settingsObserver = this._firestore
         .collection(`/users/${this.user.uid}/Settings`)
         .valueChanges()
@@ -189,39 +189,28 @@ export class LecturesService {
   }
 
   async getLectureById(id: number) {
-    return JSON.parse(JSON.stringify(this.allLectures.find(x => x.id === id)));
+   
   }
 
   async getAllLecturesLengthFromFirebase() {
-    const res = await this._firestore
-      .collection<ILecture>("lectures")
-      .valueChanges()
-      .pipe(take(1))
-      .toPromise();
-    return res.length;
+    
   }
 
-  async getLectureByIdFromFirebase(id: number): Promise<ILecture[]> {
-    const lectures = await this._firestore
-      .collection<ILecture>("lectures", ref => ref.where("id", "==", id))
-      .valueChanges()
-      .pipe(take(1))
-      .toPromise();
-
-    return lectures;
+  async getLectureByIdFromFirebase(id: number) {
+   
   }
 
   async getTopLecturesData() {
     // initial call
-    this.getTopLecturesAllTime();
+    // this.getTopLecturesAllTime();
 
-    this._globalState.onPeriodChange.subscribe(() => {
-      if (this._globalState.periodRequest === "All-time") {
-        this.getTopLecturesAllTime();
-      } else {
-        this.getTopLecturesByPeriod();
-      }
-    });
+    // this._globalState.onPeriodChange.subscribe(() => {
+    //   if (this._globalState.periodRequest === "All-time") {
+    //     this.getTopLecturesAllTime();
+    //   } else {
+    //     this.getTopLecturesByPeriod();
+    //   }
+    // });
   }
 
   getTopLecturesAllTime() {

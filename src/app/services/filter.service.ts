@@ -28,22 +28,22 @@ export class FilterService {
   }
 
   private activeFilters: IFilter = {
-    languages: [],
-    countries: [],
+    language: [],
+    country: [],
     place: [],
-    years: [],
+    year: [],
     month: [],
-    categories: [],
+    category: [],
     translation: [],
   };
 
   private localActiveFilterVariants: IFilter = {
-    languages: [],
-    countries: [],
+    language: [],
+    country: [],
     place: [],
-    years: [],
+    year: [],
     month: [],
-    categories: [],
+    category: [],
     translation: [],
   };
 
@@ -68,12 +68,12 @@ export class FilterService {
 
   transferLocalFiltersToGlobal() {
     this.activeFilters = {
-      languages: [...this.localActiveFilterVariants.languages],
-      countries: [...this.localActiveFilterVariants.countries],
+      language: [...this.localActiveFilterVariants.language],
+      country: [...this.localActiveFilterVariants.country],
       place: [...this.localActiveFilterVariants.place],
-      years: [...this.localActiveFilterVariants.years],
+      year: [...this.localActiveFilterVariants.year],
       month: [...this.localActiveFilterVariants.month],
-      categories: [...this.localActiveFilterVariants.categories],
+      category: [...this.localActiveFilterVariants.category],
       translation: [...this.localActiveFilterVariants.translation],
     };
   }
@@ -85,12 +85,12 @@ export class FilterService {
   getAllActiveFiltersCount(): number {
     let count = 0;
     let key:
-      | "languages"
-      | "countries"
+      | "language"
+      | "country"
       | "place"
-      | "years"
+      | "year"
       | "month"
-      | "categories"
+      | "category"
       | "translation";
 
     for (key in this.activeFilters) {
@@ -102,12 +102,12 @@ export class FilterService {
 
   resetLocalActiveFilters() {
     this.localActiveFilterVariants = {
-      languages: [...this.activeFilters.languages],
-      countries: [...this.activeFilters.countries],
+      language: [...this.activeFilters.language],
+      country: [...this.activeFilters.country],
       place: [...this.activeFilters.place],
-      years: [...this.activeFilters.years],
+      year: [...this.activeFilters.year],
       month: [...this.activeFilters.month],
-      categories: [...this.activeFilters.categories],
+      category: [...this.activeFilters.category],
       translation: [...this.activeFilters.translation],
     };
   }
@@ -116,12 +116,12 @@ export class FilterService {
     this.onFilterClear.emit();
 
     let key:
-      | "languages"
-      | "countries"
+      | "language"
+      | "country"
       | "place"
-      | "years"
+      | "year"
       | "month"
-      | "categories"
+      | "category"
       | "translation";
 
     for (key in this.localActiveFilterVariants) {
@@ -131,5 +131,13 @@ export class FilterService {
     for (key in this.activeFilters) {
       this.activeFilters[key] = [];
     }
+  }
+
+  setFilters(filters: IFilter) {
+    this.activeFilters = { ...filters };
+  }
+
+  getFilters(): IFilter {
+    return this.activeFilters;
   }
 }

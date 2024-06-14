@@ -67,3 +67,25 @@
     }
   }
 }
+
+
+.header-icon-and-text {
+  display: flex;
+  align-items: center; 
+
+}
+
+.knowledge-image {
+  width: 80px; 
+  height: 80px;  
+  margin-right: 8px;
+
+}
+
+.text-knowledge {
+  color: rgba(37,170,225,1); 
+}
+
+.text-base {
+  color: rgba(241,102,32,1); 
+}
