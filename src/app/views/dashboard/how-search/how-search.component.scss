@@ -1,4 +1,11 @@
 .how-to-search {
+  &__head {
+    display: flex;
+    align-items: end;
+    min-height: 83px;
+    padding: 16px 0;
+  }
+
   &__content {
     padding-right: 10vw;
     padding-bottom: 12vh;
@@ -20,6 +27,6 @@
   }
 }
 
-.main_text{
+.main_text {
   margin-bottom: 0.5rem;
 }

@@ -155,10 +155,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-   // const lecture = await this._lecturesService.getLectureByIdFromFirebase(
-   //   +queryParams?.lecture_id
-   // );
+   const lecture = await this._lecturesService.getLectureByIdFromFirebase(
+     +queryParams?.lecture_id
+   );
 
-    //this._audioPlayerService.setData([...lecture], 0, queryParams.start_point);
+    this._audioPlayerService.setData([...lecture], 0, queryParams.start_point);
   }
 }

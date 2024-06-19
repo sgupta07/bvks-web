@@ -1,130 +1,184 @@
 <div class="dashboard-head">
-  <div class="header-icon-and-text">
-    <svg class="knowledge-image">
-      <use xlink:href="./../../../assets/img/sprite.svg#book2"></use>
-    </svg>
-    <h2 class="dashboard-head__title tui-text_h4">
-      <span class="text-knowledge">Knowledge </span> 
-      <span class="text-base"> Base</span>
-    </h2>
+  <div class="text-title-container">
+    <h1 class="text-title">
+      Knowledge
+      <tui-svg
+        src="../../../../assets/img/sprite.svg#book2"
+        class="head-icon"
+      ></tui-svg>
+      Base
+    </h1>
   </div>
-  <form [formGroup]="form" class="dashboard-head__filters-wrapper">
-    <div class="select-mode-wrapper" *ngIf="isSelectMode; else filters">
-      <div class="select-wrapper tui-space_right-6">
-        <button
-          tuiButton
-          icon="./../../../assets/img/sprite.svg#addPlaylist"
-          appearance="flat"
-          type="button"
-          size="s"
-          (click)="addSelectedToPlaylist()"
-          [disabled]="selectedLecturesLength === 0"
-        >
-          Add to Playlist
-        </button>
-      </div>
-      <div class="select-wrapper tui-space_right-6">
-        <button
-          tuiButton
-          icon="./../../../assets/img/sprite.svg#heart"
-          appearance="flat"
-          type="button"
-          size="s"
-          (click)="addSelectedToFavorites()"
-          [disabled]="selectedLecturesLength === 0"
-        >
-          Add to Favorites
-        </button>
-      </div>
-      <div class="select-wrapper tui-space_right-6">
-        <button
-          tuiButton
-          icon="./../../../assets/img/sprite.svg#download"
-          appearance="flat"
-          type="button"
-          size="s"
-          [disabled]="selectedLecturesLength === 0"
-          (click)="downloadLectures()"
-        >
-          Download
-        </button>
-      </div>
-      <div class="select-wrapper tui-space_right-6">
-        <button
-          tuiButton
-          icon="./../../../assets/img/sprite.svg#checkbox"
-          appearance="flat"
-          type="button"
-          size="s"
-          (click)="markSelectedAsCompleted()"
-          [disabled]="selectedLecturesLength === 0"
-        >
-          Mark as Complete
-        </button>
-      </div>
-
-      <div class="select-wrapper tui-space_right-6">
-        <button
-          (click)="selectAll()"
-          tuiButton
-          appearance="outline"
-          type="button"
-          size="s"
-        >
-          Select All
-        </button>
-      </div>
-    </div>
-    <ng-template #filters>
-      <!-- /.select-wrapper -->
-      <!-- <div class="select-wrapper tui-space_right-6">
-        <h5 class="select-wrapper__text">Sort by</h5>
-        <tui-select
-          class="select-wrapper__select"
-          tuiTextfieldSize="s"
-          [(ngModel)]="sortRequest"
-          formControlName="sort"
-        >
-          Default View
-          <tui-data-list-wrapper
-            *tuiDataList
-            [items]="[
-              'Default View',
-              'Duration (low to high)',
-              'Duration (high to low)',
-              'Rec date (oldest first)',
-              'Rec date (latest first)',
-              'Alphabetically (A-Z)',
-              'Alphabetically (Z-A)'
-            ]"
-          ></tui-data-list-wrapper>
-        </tui-select>
-      </div> -->
-      <!-- /.select-wrapper -->
-      <div class="select-wrapper tui-space_right-6">
-        <div class="filter-badge" *ngIf="activeFiltersCount">
-          {{ activeFiltersCount }}
-        </div>
-         <button
-          (click)="showDialog()"
-          tuiButton
-          icon="./../../../assets/img/sprite.svg#filter"
-          appearance="outline"
-          type="button"
-          size="s"
-        >
-          Filters
-        </button> 
-      </div>
-    </ng-template>
-    <div class="select-wrapper select-mode-btn">
-      <h5
-        class="select-wrapper__text lectures-length"
-        *ngIf="selectedLecturesLength > 0"
+  <tui-loader
+    class="loader inline-flex tui-space_right-2"
+    [showLoader]="true"
+    [inheritColor]="true"
+    [overlay]="true"
+  >
+  </tui-loader>
+</div>
+<tui-scrollbar
+  class="dashboard__wrapper categories"
+  appPagination
+  (scroll)="onScroll()"
+>
+  <div class="search-container">
+    <!-- search -->
+    <form
+      [formGroup]="form"
+      class="search text__search"
+      (ngSubmit)="searchText()"
+    >
+      <!-- /.form__block -->
+      <tui-input
+        [(ngModel)]="search"
+        (ngModelChange)="onSearchChange()"
+        tuiTextfieldExampleText="Type your search request"
+        tuiTextfieldSize="s"
+        [tuiTextfieldCleaner]="true"
+        class="search__field"
+        formControlName="search"
       >
-        Selected: {{ selectedLecturesLength }}
-      </h5>
-      <!-- <button
+        {{ searchFieldText }}
+      </tui-input>
+
+      <button
+        tuiButton
+        [icon]="searchIcon"
+        type="submit"
+        appearance="primary-orange"
+        class="search-btn tui-space_left-3"
+        size="s"
+      >
+        <span class="search-btn__title"> Search </span>
+      </button>
+      <!-- info popup -->
+      <div class="info-popup"></div>
+
+      <ng-template #searchIcon>
+        <tui-svg src="tuiIconSearch"></tui-svg>
+      </ng-template>
+    </form>
+    <!-- /search -->
+
+    <!-- filters -->
+    <form [formGroup]="form" class="dashboard-head__filters-wrapper">
+      <div class="select-mode-wrapper" *ngIf="isSelectMode; else filters">
+        <div class="select-wrapper tui-space_right-6">
+          <button
+            tuiButton
+            icon="./../../../assets/img/sprite.svg#addPlaylist"
+            appearance="flat"
+            type="button"
+            size="s"
+            (click)="addSelectedToPlaylist()"
+            [disabled]="selectedLecturesLength === 0"
+          >
+            Add to Playlist
+          </button>
+        </div>
+        <div class="select-wrapper tui-space_right-6">
+          <button
+            tuiButton
+            icon="./../../../assets/img/sprite.svg#heart"
+            appearance="flat"
+            type="button"
+            size="s"
+            (click)="addSelectedToFavorites()"
+            [disabled]="selectedLecturesLength === 0"
+          >
+            Add to Favorites
+          </button>
+        </div>
+        <div class="select-wrapper tui-space_right-6">
+          <button
+            tuiButton
+            icon="./../../../assets/img/sprite.svg#download"
+            appearance="flat"
+            type="button"
+            size="s"
+            [disabled]="selectedLecturesLength === 0"
+            (click)="downloadLectures()"
+          >
+            Download
+          </button>
+        </div>
+        <div class="select-wrapper tui-space_right-6">
+          <button
+            tuiButton
+            icon="./../../../assets/img/sprite.svg#checkbox"
+            appearance="flat"
+            type="button"
+            size="s"
+            (click)="markSelectedAsCompleted()"
+            [disabled]="selectedLecturesLength === 0"
+          >
+            Mark as Complete
+          </button>
+        </div>
+
+        <div class="select-wrapper tui-space_right-6">
+          <button
+            (click)="selectAll()"
+            tuiButton
+            appearance="outline"
+            type="button"
+            size="s"
+          >
+            Select All
+          </button>
+        </div>
+      </div>
+      <ng-template #filters>
+        <!-- /.select-wrapper -->
+        <div class="select-wrapper tui-space_right-6">
+          <h5 class="select-wrapper__text">Sort by</h5>
+          <tui-select
+            class="select-wrapper__select"
+            tuiTextfieldSize="s"
+            [(ngModel)]="sortRequest"
+            formControlName="sort"
+          >
+            Default View
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="[
+                'Default View',
+                'Duration (low to high)',
+                'Duration (high to low)',
+                'Rec date (oldest first)',
+                'Rec date (latest first)',
+                'Alphabetically (A-Z)',
+                'Alphabetically (Z-A)'
+              ]"
+            ></tui-data-list-wrapper>
+          </tui-select>
+        </div>
+        <!-- /.select-wrapper -->
+        <div class="flex flex-row select-wrapper tui-space_right-6">
+          <div class="filter-badge" *ngIf="activeFiltersCount">
+            {{ activeFiltersCount }}
+          </div>
+          <button
+            (click)="showDialog()"
+            tuiButton
+            icon="./../../../assets/img/sprite.svg#filter"
+            appearance="outline"
+            type="button"
+            size="s"
+          >
+            Filters
+          </button>
+        </div>
+      </ng-template>
+      <div class="select-wrapper select-mode-btn">
+        <h5
+          class="select-wrapper__text lectures-length"
+          *ngIf="selectedLecturesLength > 0"
+        >
+          Selected: {{ selectedLecturesLength }}
+        </h5>
+        <!-- <button
         (click)="toggleSelectMode()"
         tuiButton
         [appearance]="isSelectMode ? 'secondary' : 'outline'"
@@ -133,52 +187,25 @@
       >
         {{ isSelectMode ? "Cancel" : "Select Multiple Files" }}
       </button> -->
-    </div>
-    <!-- /.select-wrapper -->
-  </form>
-</div>
-<tui-scrollbar class="dashboard__wrapper categories" appPagination>
-  <form
-    [formGroup]="form"
-    class="search text__search"
-    (ngSubmit)="searchText()"
-  >
-    <!-- /.form__block -->
-    <tui-input
-      [(ngModel)]="search"
-      (ngModelChange)="onSearchChange()"
-      tuiTextfieldExampleText="Type your search request"
-      tuiTextfieldSize="s"
-      [tuiTextfieldCleaner]="true"
-      class="search__field"
-      formControlName="search"
-    >
-      {{ searchFieldText }}
-    </tui-input>
- 
-    <button
-      tuiButton
-      [icon]="searchIcon"
-      type="submit"
-      appearance="primary-orange"
-      class="search-btn tui-space_left-3"
-      size="s"
-    >
-      <span class="search-btn__title"> Search </span>
-    </button>
-    <!-- info popup -->
-    <div class="info-popup">
-    </div>
+      </div>
+      <!-- /.select-wrapper -->
+    </form>
+    <!-- /filters -->
+  </div>
 
-    <ng-template #searchIcon>
-      <tui-svg src="tuiIconSearch"></tui-svg>
-    </ng-template>
-  </form>
   <app-how-search *ngIf="showHowSearch"></app-how-search>
+
   <div class="text-items-list">
     <div *ngIf="searchError">{{ searchError }}</div>
     <div *ngIf="isEmpty">No lectures was found.</div>
-    <div *ngIf="isLoading">Loading...</div>
+    <tui-loader
+      *ngIf="isLoading"
+      class="loader inline-flex tui-space_right-2"
+      [showLoader]="true"
+      [inheritColor]="true"
+      [overlay]="true"
+    >
+    </tui-loader>
 
     <app-search-text-item
       *ngFor="let item of textItems"

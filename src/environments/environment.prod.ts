@@ -13,7 +13,7 @@ export const environment = {
     measurementId: "G-09LVQMCEL5",
   },
   lectionThumbnailPlaceholder:
-    "https://bvks-d1ac.kxcdn.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
+    "https://cdn.bvksmedia.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
   razorOptions: {
     key: "rzp_live_oh6QtI3lN2c6f8",
     amount: "50000",
@@ -22,7 +22,7 @@ export const environment = {
     name: "BVKS",
     description: "BVKS Transaction",
     image:
-      "https://bvks-d1ac.kxcdn.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
+      "https://cdn.bvksmedia.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
     handler: function (response: any) {
       alert(response.razorpay_payment_id);
       alert(response.razorpay_order_id);

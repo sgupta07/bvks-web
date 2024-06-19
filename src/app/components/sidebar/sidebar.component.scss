@@ -5,7 +5,7 @@
       &__item-span {
         display: block;
       }
-      &__items-in-menu{
+      &__items-in-menu {
         margin-left: 20px;
       }
     }
@@ -78,6 +78,12 @@
       }
     }
   }
+}
+
+.large-icon {
+  width: 50px;
+  height: 50px;
+  margin: -12px -12px;
 }
 
 .menu-btn {

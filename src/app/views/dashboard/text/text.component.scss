@@ -1,3 +1,26 @@
+.text-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.text-title {
+  width: 400px;
+}
+
+.head-icon {
+  width: 90px;
+  height: 90px;
+}
+
+.search-container {
+  display: flex;
+  gap: 24px;
+  align-items: end;
+  justify-content: center;
+}
+
 .form {
   position: relative;
 
@@ -68,24 +91,25 @@
   }
 }
 
-
 .header-icon-and-text {
   display: flex;
-  align-items: center; 
+  align-items: center;
+}
 
+.loader {
+  color: rgba(241, 102, 32, 1);
 }
 
 .knowledge-image {
-  width: 80px; 
-  height: 80px;  
+  width: 80px;
+  height: 80px;
   margin-right: 8px;
-
 }
 
 .text-knowledge {
-  color: rgba(37,170,225,1); 
+  color: rgba(37, 170, 225, 1);
 }
 
 .text-base {
-  color: rgba(241,102,32,1); 
+  color: rgba(241, 102, 32, 1);
 }

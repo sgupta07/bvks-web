@@ -42,7 +42,6 @@ export class MultiSelectService {
   }
 
   constructor(
-    public _lecturesService: LecturesService,
     private _paginationService: PaginationService,
     private _filterService: FilterService,
     private _globalState: GlobalStateService

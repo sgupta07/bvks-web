@@ -124,13 +124,12 @@ export class LecturesComponent implements OnInit {
 
     if (this.searchType === searchTypes.DEEP) {
       this.isLecturesLoading = true;
-
-      this._deepSearchService.search(this.searchRequest)?.subscribe({
+      this._deepSearchService.search(this.searchRequest, 1000, 0)?.subscribe({
         next: data => {
           if (!data) {
             return;
           }
-          this.searchedLecturesItems = data.data;
+          this.searchedLecturesItems = data.data.transcriptions;
           this.lecturesData = this.getLecturesFirstPage();
           this.isLecturesLoading = false;
         },

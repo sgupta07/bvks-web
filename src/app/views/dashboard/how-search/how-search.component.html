@@ -1,27 +1,28 @@
-<div class="dashboard-text">
-  <h2 class="dashboard-head__title tui-text_h4">
-    How to search:
-  </h2>
+<div class="how-to-search__head">
+  <h2 class="dashboard-head__title tui-text_h4">How to search:</h2>
 </div>
-<tui-scrollbar class=" how-to-search__wrapper">
+<tui-scrollbar class="how-to-search__wrapper">
   <div class="col-12 col-md-7 how-to-search__content">
     <div class="block-paragraph">
-      <p class="main_text">Since most of the transcripts use regular 
-        English spellings and only a few contain diacritized versions of words, 
-        please start your search using the regular English spelling. 
-        If necessary, search again using the non-diacritized version to find additional results (if any)
-        for the same keywords. Note that you may not find any results with the diacritized version.
+      <p class="main_text">
+        Since most of the transcripts use regular English spellings and only a
+        few contain diacritized versions of words, please start your search
+        using the regular English spelling. If necessary, search again using the
+        non-diacritized version to find additional results (if any) for the same
+        keywords. Note that you may not find any results with the diacritized
+        version.
       </p>
-      <p class="main_text">For example, if you are looking for information about Sankaracarya,
-        first search for 'Shankaracharya' to get the maximum number of
-        results. To find more results, you can then search with
-        'Sankaracarya,' although this may or may not yield additional
-        results. The same applies to other words like Canakya. Start by
-        searching for 'Chanakya' to get the most hits. Searching with
-        'Canakya' may or may not provide more results.
+      <p class="main_text">
+        For example, if you are looking for information about Sankaracarya,
+        first search for 'Shankaracharya' to get the maximum number of results.
+        To find more results, you can then search with 'Sankaracarya,' although
+        this may or may not yield additional results. The same applies to other
+        words like Canakya. Start by searching for 'Chanakya' to get the most
+        hits. Searching with 'Canakya' may or may not provide more results.
       </p>
-      <p class="main_text">Here are examples of the different types of searches that our
-        system currently supports:
+      <p class="main_text">
+        Here are examples of the different types of searches that our system
+        currently supports:
       </p>
       <h4>Phrases:</h4>
       <p>
@@ -48,23 +49,36 @@
         with the single character replaced. For example, to search for "text" or
         "test" you can use the search:
       </p>
-      <p><a href="https://web.bvksdigital.com/dashboard/text?search=te%3Ft">te?t</a></p>
+      <p>
+        <a href="https://web.bvksdigital.com/dashboard/text?search=te%3Ft"
+          >te?t</a
+        >
+      </p>
       <p>
         Multiple character wildcard searches looks for 0 or more characters. For
         example, to search for Hari, Harinama or Haridāsa, you can use the
         search:
       </p>
-      <p><a href=" https://web.bvksdigital.com/dashboard/text?search=hari* ">hari*</a></p>
+      <p>
+        <a href=" https://web.bvksdigital.com/dashboard/text?search=hari* "
+          >hari*</a
+        >
+      </p>
       <p>You can also use the wildcard searches in the middle of a term.</p>
-      <p><a href="https://web.bvksdigital.com/dashboard/text?search=pre*us">pre*us</a></p>
+      <p>
+        <a href="https://web.bvksdigital.com/dashboard/text?search=pre*us"
+          >pre*us</a
+        >
+      </p>
       <p>
         Note: You cannot use a * or ? symbol as the first character of a search.
       </p>
       <h4>Proximity search:</h4>
       <p>
-        Knowledge Base search supports finding words are a within a specific distance away. 
-        To do a proximity search use the tilde, "~", symbol at the end of a Phrase. 
-        For example to search for a "paraphenalia" and "king" within 4 words of each other in a document use the search:
+        Knowledge Base search supports finding words are a within a specific
+        distance away. To do a proximity search use the tilde, "~", symbol at
+        the end of a Phrase. For example to search for a "paraphenalia" and
+        "king" within 4 words of each other in a document use the search:
       </p>
       <p>
         <a
@@ -87,15 +101,18 @@
         sets.
       </p>
       <p>
-        To search for documents that contain either "krsna" or "cow" use the
+        To search for documents that contain either “farms” or “cows” use the
         query:
       </p>
       <p>
-        <a href="https://web.bvksdigital.com/dashboard/text?search=farms%20cows">farms cows</a>
+        <a href="https://web.bvksdigital.com/dashboard/text?search=farms%20cows"
+          >farms cows</a
+        >
       </p>
       <p>or</p>
       <p>
-        <a href="https://web.bvksdigital.com/dashboard/text?search=farms%20OR%20cows"
+        <a
+          href="https://web.bvksdigital.com/dashboard/text?search=farms%20OR%20cows"
           >farms OR cows</a
         >
       </p>
@@ -106,8 +123,8 @@
         using sets.
       </p>
       <p>
-        To search for documents that contain "practical application" and
-        "control of the mind" use the query:
+        To search for documents that contain “varnashrama dharma” and “cow
+        protection” use the query:
       </p>
       <p>
         <a
@@ -117,12 +134,12 @@
       </p>
       <h5>+ (plus)</h5>
       <p>
-        The "+" or required operator requires that the term after the "+" symbol
+        The “+” or required operator requires that the term after the “+” symbol
         exist somewhere in a the field of a single document.
       </p>
       <p>
-        To search for documents that must contain "pure" and may contain
-        "devotion" use the query:
+        To search for documents that must contain “cow” and may contain “calf”
+        use the query:
       </p>
       <p>
         <a href="https://web.bvksdigital.com/dashboard/text?search=+cow%20calf"
@@ -162,7 +179,8 @@
         its term. For example, if you are searching for
       </p>
       <p>
-        <a href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%20education"
+        <a
+          href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%20education"
           >knowledge&nbsp;education</a
         >
       </p>
@@ -171,7 +189,8 @@
         ^ symbol along with the boost factor next to the term. You would type:
       </p>
       <p>
-        <a href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%5E10%20education"
+        <a
+          href=" https://web.bvksdigital.com/dashboard/text?search=knowledge%5E10%20education"
           >knowledge^10&nbsp;education</a
         >
       </p>

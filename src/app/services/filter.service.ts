@@ -48,11 +48,10 @@ export class FilterService {
   };
 
   constructor(private _lecturesService: LecturesService) {}
-
   toggleActiveFilter(type: FilterCategories, filter: string) {
     if (this.isVariantActive(type, filter)) {
       const index = this.localActiveFilterVariants[type].findIndex(
-        (x) => x === filter
+        x => x === filter
       );
       this.localActiveFilterVariants[type].splice(index, 1);
 

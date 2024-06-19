@@ -1,3 +1,4 @@
+import { transition } from "@angular/animations";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
@@ -22,24 +23,40 @@ export interface ISearchResponse {
 }
 interface ISearchItem {
   id: number;
-  transcription: string[]
+  transcription: string[];
 }
 
 enum SearchBooleanEnum {
-  OR = "should",
-  AND = "filter",
+  OR = "filter",
+  AND = "should",
   NOT = "must_not",
+}
+export interface ITranscriptionResponse {
+  data: {
+    transcriptions: {
+      id: number;
+      count: number;
+      transcription: string[];
+    }[];
+  };
+  total: number;
 }
 
 interface LectureFilterDto {
   language?: string[];
   country?: string[];
   year?: string[];
-  month?: string[]; 
+  month?: string[];
   place?: string[];
   translation?: string[];
   category?: string[];
-};
+}
+
+export interface LectureSortDto {
+  "title.keyword"?: "asc" | "desc";
+  dateOfRecording?: "asc" | "desc";
+  duration?: "asc" | "desc";
+}
 
 @Injectable({
   providedIn: "root",
@@ -47,65 +64,94 @@ interface LectureFilterDto {
 export class DeepSearchService {
   constructor(private http: HttpClient) {}
 
-  search(searchString: string) {
+  search(searchString: string, take: number, skip: number) {
     if (searchString.trim().length === 0) {
       return;
     }
+    const requestBody: any = { search: searchString };
+    let endpoint = `${environment.elasticUrl}transcription/search/phrase`;
     const params = this.parsedSearchStringParams(searchString);
-    return this.http.get<IDeepSearchResponse>(
-      `${environment.elasticUrl}transcription/search/phrase`,
-      {
-        params,
-      }
-    );
+    if (take !== undefined) {
+      endpoint += `?take=${take}`;
+    }
+    if (skip !== undefined && skip >= 0) {
+      const separator = endpoint.includes("?") ? "&" : "?";
+      endpoint += `${separator}skip=${skip}`;
+    }
+    return this.http.post<ITranscriptionResponse>(endpoint, requestBody);
   }
 
-  searchTranscriptions(searchString: string, filters?: LectureFilterDto) {
+  searchTranscriptions(
+    searchString: string,
+    filters?: LectureFilterDto,
+    sort?: LectureSortDto,
+    take?: number,
+    skip?: number
+  ) {
     if (searchString.trim().length === 0) {
       return;
     }
     const requestBody: any = { search: searchString };
 
     const params = this.parsedSearchStringParams(searchString);
-    let endpoint
+    let endpoint;
     if (!params.default) {
       const nonEmptyFilters: Partial<LectureFilterDto> = {};
       if (filters) {
         Object.keys(filters).forEach(key => {
-          if (filters[key as keyof LectureFilterDto] && filters[key as keyof LectureFilterDto]!.length > 0) {
-            nonEmptyFilters[key as keyof LectureFilterDto] = filters[key as keyof LectureFilterDto];
+          if (
+            filters[key as keyof LectureFilterDto] &&
+            filters[key as keyof LectureFilterDto]!.length > 0
+          ) {
+            nonEmptyFilters[key as keyof LectureFilterDto] =
+              filters[key as keyof LectureFilterDto];
           }
         });
       }
       if (Object.keys(nonEmptyFilters).length > 0) {
         requestBody.filters = nonEmptyFilters;
       }
-  
-       endpoint = `${environment.elasticUrl}transcription/search/wildcard`
 
+      if (sort && Object.values(sort).length > 0) {
+        requestBody.sort = sort;
+      }
+
+      endpoint = `${environment.elasticUrl}transcription/search/phrase`;
     } else {
       const nonEmptyFilters: Partial<LectureFilterDto> = {};
       if (filters) {
         Object.keys(filters).forEach(key => {
-          if (filters[key as keyof LectureFilterDto] && filters[key as keyof LectureFilterDto]!.length > 0) {
-            nonEmptyFilters[key as keyof LectureFilterDto] = filters[key as keyof LectureFilterDto];
+          if (
+            filters[key as keyof LectureFilterDto] &&
+            filters[key as keyof LectureFilterDto]!.length > 0
+          ) {
+            nonEmptyFilters[key as keyof LectureFilterDto] =
+              filters[key as keyof LectureFilterDto];
           }
         });
       }
       if (Object.keys(nonEmptyFilters).length > 0) {
         requestBody.filters = nonEmptyFilters;
       }
-  
-       endpoint = `${environment.elasticUrl}transcription/search/phrase`;
-    }
 
-  
-   
-  
-    return this.http.post<ISearchResponse>(
-      endpoint,
-      requestBody
-    );
+      if (sort && Object.values(sort).length > 0) {
+        requestBody.sort = sort;
+      }
+
+      endpoint = `${environment.elasticUrl}transcription/search/phrase`;
+    }
+    if (take !== undefined) {
+      endpoint += `?take=${take}`;
+    }
+    if (skip !== undefined && skip >= 0) {
+      const separator = endpoint.includes("?") ? "&" : "?";
+      endpoint += `${separator}skip=${skip}`;
+    }
+    if (params.default != true) {
+      return this.http.post<ITranscriptionResponse>(endpoint, params);
+    } else {
+      return this.http.post<ITranscriptionResponse>(endpoint, requestBody);
+    }
   }
 
   searchTranscriptionss(searchString: string) {
@@ -129,10 +175,6 @@ export class DeepSearchService {
       );
     }
   }
-  
-  
-  
-
 
   searchTranscriptionById(id: number) {
     return this.http.get<any>(`${environment.elasticUrl}transcription/${id}`);
@@ -179,8 +221,10 @@ export class DeepSearchService {
         SearchBooleanEnum.OR;
       const boolSearchParams = {
         search,
-        "boolSearch[search]": boolSearch,
-        "boolSearch[type]": boolSearchType,
+        boolSearch: {
+          search: boolSearch,
+          type: boolSearchType,
+        },
       };
 
       return boolSearchParams;
@@ -206,8 +250,10 @@ export class DeepSearchService {
 
       const boostSearch = {
         search,
-        "boostSearch[search]": boostSearchStr,
-        "boostSearch[negativeCoefficient]": parsedCoefficient, // If coefficient > 1, set to null
+        boostSearch: {
+          search: boostSearchStr,
+          negativeCoefficient: parsedCoefficient,
+        },
       };
 
       return boostSearch;
@@ -219,7 +265,9 @@ export class DeepSearchService {
       const plusSearch = operator1 ? search1 || search2 : search3 || search4;
       const plusSearchParams = {
         search: plusSearch,
-        "plusSearch[search]": search,
+        plusSearch: {
+          search: search,
+        },
       };
       return plusSearchParams;
     } else {

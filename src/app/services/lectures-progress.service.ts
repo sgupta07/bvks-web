@@ -23,6 +23,10 @@ export class LecturesProgressService {
   }
 
   initProgressSubscribe() {
+    if (window.location.href.includes("/dashboard/text")) {
+      return;
+    }
+
     this.user = this._authService.getUser();
 
     if (!this.user) {

@@ -17,7 +17,7 @@ export const environment = {
     measurementId: "G-09LVQMCEL5",
   },
   lectionThumbnailPlaceholder:
-    "https://bvks-d1ac.kxcdn.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
+    "https://cdn.bvksmedia.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
   razorOptions: {
     key: "rzp_test_LvDUh4q43pNF8G",
     handler: null as any,
@@ -27,7 +27,7 @@ export const environment = {
     name: "BVKS",
     description: "BVKS Transaction",
     image:
-      "https://bvks-d1ac.kxcdn.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
+      "https://cdn.bvksmedia.com/wp-content/uploads/2018/05/20151503/Untitled-2.jpg",
     callback_url: "",
     prefill: {
       name: "",
